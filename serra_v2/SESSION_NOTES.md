@@ -98,3 +98,4 @@ git diff --staged
 - Aggiunta nota sui servizi systemd della Serra V1 in `docs/v1-systemd-services.md`.
 - Aggiunta nota sul database MariaDB della Serra V1 in `docs/v1-database.md`.
 - Aggiornato schema V1 reale: tabella `dati` con 333045 letture e tabella `stati` con 1 riga di stato/configurazione.
+- Chiusura sessione: repository allineato a GitHub; prossimo passo consigliato e' recuperare gli script V1 per mappare i canali `L1`, `L2`, `R1`, `R2`, `S1`, `F1`, `V1`.
