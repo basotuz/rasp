@@ -1,0 +1,7 @@
+from serra_v2.web.app import create_app
+
+
+app = create_app()
+
+if __name__ == "__main__":
+    app.run()

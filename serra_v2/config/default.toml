@@ -1,0 +1,27 @@
+[app]
+name = "Serra v2"
+environment = "development"
+mode = "AUTO"
+
+[server]
+host = "127.0.0.1"
+port = 5000
+debug = true
+
+[database]
+path = "data/serra_v2.sqlite3"
+
+[serial]
+port = "/dev/ttyACM0"
+baudrate = 9600
+timeout_seconds = 2
+
+[thresholds]
+soil_moisture_min_percent = 35
+air_temperature_max_c = 32
+air_humidity_min_percent = 45
+
+[features]
+telegram_notifications = false
+mqtt = false
+fertilization = false

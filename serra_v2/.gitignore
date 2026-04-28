@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/runtime/
+logs/*.log
+logs/*.jsonl
+
+# Raspberry Pi / OS noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# VSCode local overrides
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Arduino build artifacts
+arduino/**/build/
+arduino/**/*.hex
+arduino/**/*.elf
+arduino/**/*.bin

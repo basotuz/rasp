@@ -1,0 +1,22 @@
+[project]
+name = "serra-v2"
+version = "0.1.0"
+description = "Mini serra smart con Raspberry Pi, Arduino, Flask e SQLite."
+requires-python = ">=3.11"
+dependencies = [
+  "Flask==3.0.3",
+  "pyserial==3.5",
+  "python-dotenv==1.0.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
