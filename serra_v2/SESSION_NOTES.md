@@ -56,6 +56,7 @@ Se `.venv` non esiste ancora:
 - Eseguire controlli con `./scripts/check.sh`.
 - Definire meglio il protocollo seriale in `docs/serial-protocol.md`.
 - Iniziare dai moduli piccoli: configurazione, database, dashboard base, poi hardware.
+- Recuperare dalla Serra V1 gli script citati in `docs/v1-systemd-services.md`.
 
 ## Comandi utili
 
@@ -92,3 +93,4 @@ git diff --staged
 
 - Creato `SESSION_NOTES.md` per conservare il contesto operativo tra chat.
 - Confermato che `PROJECT_RULES.md` resta la fonte ufficiale del progetto.
+- Aggiunta nota sui servizi systemd della Serra V1 in `docs/v1-systemd-services.md`.
