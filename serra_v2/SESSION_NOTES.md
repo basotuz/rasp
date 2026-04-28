@@ -57,7 +57,8 @@ Se `.venv` non esiste ancora:
 - Definire meglio il protocollo seriale in `docs/serial-protocol.md`.
 - Iniziare dai moduli piccoli: configurazione, database, dashboard base, poi hardware.
 - Recuperare dalla Serra V1 gli script citati in `docs/v1-systemd-services.md`.
-- Recuperare schema MariaDB V1 delle tabelle `dati` e `stati`, vedi `docs/v1-database.md`.
+- Schema MariaDB V1 di `dati` e `stati` acquisito in `docs/v1-database.md`.
+- Recuperare significato dei canali V1 `L1`, `L2`, `R1`, `R2`, `S1`, `F1`, `V1`.
 
 ## Comandi utili
 
@@ -96,3 +97,4 @@ git diff --staged
 - Confermato che `PROJECT_RULES.md` resta la fonte ufficiale del progetto.
 - Aggiunta nota sui servizi systemd della Serra V1 in `docs/v1-systemd-services.md`.
 - Aggiunta nota sul database MariaDB della Serra V1 in `docs/v1-database.md`.
+- Aggiornato schema V1 reale: tabella `dati` con 333045 letture e tabella `stati` con 1 riga di stato/configurazione.
