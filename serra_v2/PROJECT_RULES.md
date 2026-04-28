@@ -124,6 +124,7 @@ Separazione logica del codice Python:
 - Ogni script deve essere ripetibile e sicuro.
 - I file runtime locali non vanno committati.
 - I segreti non vanno mai nel repository.
+- Quando viene creato un nuovo file di progetto, va fatto commit e push su Git appena la modifica e' coerente.
 - Ogni nuova decisione strutturale importante va riportata qui.
 
 ## Script operativi
