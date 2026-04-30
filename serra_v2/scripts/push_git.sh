@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Evita che git apra un pager (less) e richieda 'q' / spazio.
+export GIT_PAGER=cat
+export LESS="${LESS:--FRSX}"
+
 # push_git.sh
 #
 # Nota: puoi lanciarlo sia da:
@@ -107,7 +111,7 @@ fi
 echo
 
 echo "Diff staged:"
-git -C "$REPO_ROOT" diff --cached
+git -C "$REPO_ROOT" --no-pager diff --cached
 
 echo
 
