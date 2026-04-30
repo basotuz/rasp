@@ -61,6 +61,8 @@ La direzione preferita e' JSON Lines: un messaggio JSON per riga.
 - Python come linguaggio backend principale;
 - SQLite come database iniziale;
 - pyserial per comunicazione USB seriale;
+- Apache, PHP e MariaDB installati sul Raspberry come servizi disponibili,
+  ma non ancora dipendenze applicative di Serra v2;
 - Arduino IDE / firmware `.ino` per lo slave;
 - pytest per test;
 - Ruff per linting;
@@ -90,6 +92,7 @@ serra_v2/
   config/                   Configurazioni versionate
   data/                     Database e dati runtime locali
   docs/                     Documentazione tecnica
+    raspberry-environment.md Ambiente operativo del Raspberry attuale
   logs/                     Log runtime locali
   scripts/                  Script operativi
   src/serra_v2/             Codice Python applicativo
@@ -109,6 +112,8 @@ Separazione logica del codice Python:
 - Tenere tutto il progetto dentro `serra_v2/`.
 - Non introdurre framework di interfaccia prima di aver scelto consapevolmente la direzione.
 - Non far dipendere il dominio direttamente da interfaccia, SQLite o seriale.
+- Non spostare il database applicativo da SQLite a MariaDB/MySQL senza una
+  decisione esplicita e relativa migrazione documentata.
 - Tenere Arduino semplice: esecuzione hardware, non logica applicativa complessa.
 - Separare sempre:
   - interfaccia utente futura;
@@ -245,6 +250,7 @@ Obiettivo: sistema avviabile in locale/Raspberry con database, stato applicativo
 - virtualenv e script setup;
 - entrypoint CLI per stato applicativo;
 - SQLite bootstrap;
+- ambiente Raspberry documentato con Apache, PHP e MariaDB disponibili;
 - schema iniziale per letture sensori, eventi e comandi;
 - firmware Arduino placeholder;
 - protocollo seriale documentato a livello iniziale;

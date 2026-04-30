@@ -23,6 +23,10 @@ Il progetto nasce con una base piccola, ma organizzata per crescere senza divent
 - Python backend
 - SQLite come database iniziale
 - Comunicazione seriale USB Raspberry <-> Arduino
+- Apache, PHP e MariaDB installati sul Raspberry come servizi disponibili
+
+La base applicativa resta Python + SQLite. Apache/PHP/MariaDB sono pronti sul
+Raspberry, ma l'interfaccia utente non e' ancora stata scelta.
 
 ## Struttura
 
@@ -55,6 +59,11 @@ ancora scelta: verra' progettata dopo aver stabilizzato dominio, database e hard
 
 La strategia consigliata e' descritta in [docs/git-workflow.md](docs/git-workflow.md).
 In breve: `main` sempre stabile, branch brevi per feature/fix, commit piccoli e descrittivi.
+
+## Ambiente Raspberry
+
+L'ambiente preparato sul Raspberry attuale e' documentato in
+[docs/raspberry-environment.md](docs/raspberry-environment.md).
 
 ## Stato del progetto
 

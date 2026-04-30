@@ -12,6 +12,11 @@ Arduino gestisce sensori/attuatori a basso livello e comunica con Raspberry via 
 - `services`: orchestrazione di irrigazione, tetto, notifiche e automazioni
 - `db`: schema SQLite, connessione e bootstrap
 
+Sul Raspberry attuale sono installati anche Apache, PHP e MariaDB come servizi
+di piattaforma disponibili. Non fanno ancora parte dell'architettura applicativa
+di Serra v2: la base resta Python + SQLite finche' non viene presa una decisione
+esplicita sull'interfaccia o su una migrazione database.
+
 ## Principio guida
 
 La logica della serra non deve dipendere direttamente da interfaccia utente, seriale o database.
