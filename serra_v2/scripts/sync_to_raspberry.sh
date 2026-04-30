@@ -18,7 +18,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"  # .../rasp/serra_v2
 
 RASP_HOST="${SERRA_RASP_HOST:-baso@10.1.2.66}"
-RASP_PATH="${SERRA_RASP_PATH:-/home/baso/Documenti/MIA/VSCODE/rasp/serra_v2}"
+RASP_PATH="${SERRA_RASP_PATH:-/home/baso/serra_v2}"
 
 DELETE_MODE="false"
 if [[ ${1:-} == "--delete" ]]; then
@@ -27,19 +27,19 @@ if [[ ${1:-} == "--delete" ]]; then
 fi
 
 if [[ ${1:-} == "-h" || ${1:-} == "--help" ]]; then
-  cat <<HELP
+  cat <<EOF
 Uso:
   ./scripts/sync_to_raspberry.sh [--delete]
 
 Env:
   SERRA_RASP_HOST  (default: baso@10.1.2.66)
-  SERRA_RASP_PATH  (default: /home/baso/Documenti/MIA/VSCODE/rasp/serra_v2)
+  SERRA_RASP_PATH  (default: /home/baso/serra_v2)
 
 Esempi:
   ./scripts/sync_to_raspberry.sh
   ./scripts/sync_to_raspberry.sh --delete
   SERRA_RASP_HOST="baso@10.1.2.66" ./scripts/sync_to_raspberry.sh
-HELP
+EOF
   exit 0
 fi
 
@@ -100,9 +100,10 @@ echo "Sync in corso..."
 rsync "${RSYNC_ARGS[@]}" -e ssh "${PROJECT_DIR}/" "${RASP_HOST}:${RASP_PATH}/"
 
 echo
+
 echo "OK. Suggerimento: sul Raspberry puoi verificare con:"
-cat <<EOF2
+cat <<EOF
   cd "$RASP_PATH"
   ./scripts/check.sh
   ./scripts/status.sh
-EOF2
+EOF
