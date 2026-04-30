@@ -19,8 +19,17 @@ git status
 
 4. Se serve lavorare sull'app:
 
+Su PC (sviluppo):
+
 ```bash
 cd ~/Documenti/MIA/VSCODE/rasp/serra_v2
+source .venv/bin/activate
+```
+
+Su Raspberry (runtime/deploy):
+
+```bash
+cd /home/baso/serra_v2
 source .venv/bin/activate
 ```
 
@@ -63,8 +72,21 @@ Se `.venv` non esiste ancora:
 
 ## Comandi utili
 
+PC (sviluppo):
+
 ```bash
 cd ~/Documenti/MIA/VSCODE/rasp/serra_v2
+./scripts/setup_venv.sh
+source .venv/bin/activate
+./scripts/bootstrap_db.sh
+./scripts/status.sh
+./scripts/check.sh
+```
+
+Raspberry (runtime/deploy):
+
+```bash
+cd /home/baso/serra_v2
 ./scripts/setup_venv.sh
 source .venv/bin/activate
 ./scripts/bootstrap_db.sh
@@ -124,3 +146,9 @@ git diff --staged
 - Versioni verificate: Apache 2.4.66, PHP 8.4.16, MariaDB 11.8.6.
 - Aggiunta configurazione Apache `ServerName serra3` per evitare il warning sul nome host.
 - Aggiunto documento operativo `docs/raspberry-environment.md`.
+
+### 2026-04-30 - Sync progetto PC -> Raspberry
+
+- Spostato il progetto sul Raspberry in `/home/baso/serra_v2`.
+- Aggiornato lo script `scripts/sync_to_raspberry.sh` per sincronizzare verso `/home/baso/serra_v2` di default.
+- Verificati su Raspberry: `./scripts/bootstrap_db.sh`, `./scripts/status.sh` (db creato e status OK).

@@ -71,10 +71,18 @@ La direzione preferita e' JSON Lines: un messaggio JSON per riga.
 
 ## Struttura progetto
 
-Il progetto deve rimanere dentro:
+Percorsi di riferimento:
+
+- PC (sviluppo):
 
 ```text
 ~/Documenti/MIA/VSCODE/rasp/serra_v2
+```
+
+- Raspberry (runtime/deploy):
+
+```text
+/home/baso/serra_v2
 ```
 
 Struttura attuale:
@@ -133,16 +141,27 @@ Separazione logica del codice Python:
 Script attuali:
 
 ```bash
-./scripts/setup_venv.sh       # crea virtualenv e installa dipendenze
-./scripts/bootstrap_db.sh     # crea/aggiorna database SQLite locale
-./scripts/status.sh           # stampa lo stato applicativo iniziale
-./scripts/check.sh            # esegue test e lint
+./scripts/setup_venv.sh          # crea virtualenv e installa dipendenze
+./scripts/bootstrap_db.sh        # crea/aggiorna database SQLite locale
+./scripts/status.sh              # stampa lo stato applicativo iniziale
+./scripts/check.sh               # esegue test e lint
+./scripts/sync_to_raspberry.sh   # (da PC) sync del codice verso Raspberry via rsync/ssh
 ```
 
-Flusso sviluppo locale consigliato:
+Flusso sviluppo locale consigliato (PC):
 
 ```bash
 cd ~/Documenti/MIA/VSCODE/rasp/serra_v2
+./scripts/setup_venv.sh
+source .venv/bin/activate
+./scripts/bootstrap_db.sh
+./scripts/status.sh
+```
+
+Flusso runtime/deploy consigliato (Raspberry):
+
+```bash
+cd /home/baso/serra_v2
 ./scripts/setup_venv.sh
 source .venv/bin/activate
 ./scripts/bootstrap_db.sh

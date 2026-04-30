@@ -42,10 +42,22 @@ serra_v2/
   tests/                   Test unitari e di integrazione
 ```
 
-## Avvio rapido sviluppo
+## Avvio rapido sviluppo (PC)
 
 ```bash
 cd ~/Documenti/MIA/VSCODE/rasp/serra_v2
+./scripts/setup_venv.sh
+source .venv/bin/activate
+./scripts/bootstrap_db.sh
+./scripts/status.sh
+```
+
+## Avvio rapido su Raspberry
+
+Percorso runtime sul Raspberry:
+
+```bash
+cd /home/baso/serra_v2
 ./scripts/setup_venv.sh
 source .venv/bin/activate
 ./scripts/bootstrap_db.sh
@@ -64,6 +76,20 @@ In breve: `main` sempre stabile, branch brevi per feature/fix, commit piccoli e 
 
 L'ambiente preparato sul Raspberry attuale e' documentato in
 [docs/raspberry-environment.md](docs/raspberry-environment.md).
+
+## Sync PC -> Raspberry
+
+Per sincronizzare il codice dal PC al Raspberry (senza copiare `.venv/`, `data/`, `logs/`):
+
+```bash
+./scripts/sync_to_raspberry.sh
+```
+
+Per allineare anche cancellando file sul Raspberry (attenzione):
+
+```bash
+./scripts/sync_to_raspberry.sh --delete
+```
 
 ## Stato del progetto
 

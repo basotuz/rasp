@@ -17,7 +17,7 @@ Python: 3.13.5
 Percorso progetto:
 
 ```bash
-/home/baso/Documenti/MIA/VSCODE/rasp/serra_v2
+/home/baso/serra_v2
 ```
 
 ## Pacchetti installati
@@ -68,7 +68,7 @@ ServerName serra3
 Comandi verificati sul Raspberry:
 
 ```bash
-cd ~/Documenti/MIA/VSCODE/rasp/serra_v2
+cd /home/baso/serra_v2
 ./scripts/setup_venv.sh
 ./scripts/check.sh
 ./scripts/bootstrap_db.sh
