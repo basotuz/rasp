@@ -156,5 +156,7 @@ git diff --staged
 ### 2026-04-30 - Home provvisoria Apache
 
 - Aggiunta pagina statica `web/index.html` come home di cortesia "Serra in costruzione".
-- Aggiunto `scripts/deploy_home.sh` per installare la pagina in `/var/www/html/index.html`.
+- Aggiunto `deploy/apache/serra_v2.conf` come virtualhost Apache dedicato.
+- Aggiunto `scripts/deploy_home.sh` per installare la pagina in `/var/www/serra_v2/index.html`,
+  abilitare `serra_v2.conf`, disabilitare `000-default.conf` e ricaricare Apache.
 - Decisione confermata: la pagina statica non rappresenta ancora la scelta dell'interfaccia applicativa definitiva.

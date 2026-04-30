@@ -99,6 +99,8 @@ serra_v2/
   arduino/                  Firmware Arduino
   config/                   Configurazioni versionate
   data/                     Database e dati runtime locali
+  deploy/                   File di deploy versionati
+    apache/serra_v2.conf    Virtualhost Apache provvisorio
   docs/                     Documentazione tecnica
     raspberry-environment.md Ambiente operativo del Raspberry attuale
   logs/                     Log runtime locali
@@ -147,7 +149,7 @@ Script attuali:
 ./scripts/status.sh              # stampa lo stato applicativo iniziale
 ./scripts/check.sh               # esegue test e lint
 ./scripts/sync_to_raspberry.sh   # (da PC) sync del codice verso Raspberry via rsync/ssh
-./scripts/deploy_home.sh         # (su Raspberry) installa la home statica in Apache
+./scripts/deploy_home.sh         # (su Raspberry) installa home statica e virtualhost Apache
 ```
 
 Flusso sviluppo locale consigliato (PC):
@@ -246,8 +248,9 @@ Serra v2 deve essere:
 - costruita per iterazioni piccole e pulite.
 
 L'interfaccia futura deve essere uno strumento operativo, non una pagina decorativa.
-La home statica `web/index.html` e' una pagina di cortesia provvisoria per Apache:
-non rappresenta ancora la scelta dell'interfaccia applicativa definitiva.
+La home statica `web/index.html` e il virtualhost `deploy/apache/serra_v2.conf`
+sono una pagina di cortesia provvisoria per Apache: non rappresentano ancora la
+scelta dell'interfaccia applicativa definitiva.
 L'automazione deve essere prevedibile e sempre tracciabile tramite log/eventi.
 La modalita' manuale deve poter intervenire in modo chiaro e controllato.
 

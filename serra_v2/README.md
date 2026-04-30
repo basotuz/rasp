@@ -37,9 +37,11 @@ serra_v2/
   data/                    Database locali e file runtime ignorati da Git
   docs/                    Documentazione tecnica e workflow
   logs/                    Log runtime ignorati da Git
+  deploy/                  File di deploy versionati
   scripts/                 Script di setup, avvio e manutenzione
   src/serra_v2/            Codice Python applicativo
   tests/                   Test unitari e di integrazione
+  web/                     Home statica provvisoria
 ```
 
 ## Avvio rapido sviluppo (PC)
@@ -99,12 +101,21 @@ La pagina statica "Serra in costruzione" e' versionata in:
 web/index.html
 ```
 
-Sul Raspberry puo' essere installata come home Apache con:
+Il virtualhost Apache dedicato e' versionato in:
+
+```text
+deploy/apache/serra_v2.conf
+```
+
+Sul Raspberry la home e il virtualhost possono essere installati con:
 
 ```bash
 cd /home/baso/serra_v2
 ./scripts/deploy_home.sh
 ```
+
+Lo script copia la pagina in `/var/www/serra_v2`, abilita il sito
+`serra_v2.conf`, disabilita `000-default.conf` e ricarica Apache.
 
 Questa home e' solo una pagina di cortesia: non introduce ancora una scelta
 definitiva sull'interfaccia applicativa.
