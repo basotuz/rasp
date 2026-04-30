@@ -160,3 +160,10 @@ git diff --staged
 - Aggiunto `scripts/deploy_home.sh` per installare la pagina in `/var/www/serra_v2/index.html`,
   abilitare `serra_v2.conf`, disabilitare `000-default.conf` e ricaricare Apache.
 - Decisione confermata: la pagina statica non rappresenta ancora la scelta dell'interfaccia applicativa definitiva.
+
+### 2026-04-30 - Roadmap touch e Telegram
+
+- Aggiunto `TODO.md` come roadmap operativa distinta da `SESSION_NOTES.md`.
+- Priorita' future annotate: interfaccia operativa per tablet/piccolo schermo touch
+  e notifiche Telegram opzionali.
+- Aggiornati `README.md` e `PROJECT_RULES.md` per puntare al TODO e chiarire la direzione.

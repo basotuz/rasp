@@ -91,6 +91,7 @@ Struttura attuale:
 serra_v2/
   PROJECT_RULES.md          Fonte ufficiale del progetto
   README.md                 Panoramica e avvio rapido
+  TODO.md                   Roadmap operativa e prossimi step
   .env.example              Variabili ambiente di esempio
   .gitignore                File e artefatti da non versionare
   pyproject.toml            Configurazione Python/tooling
@@ -116,6 +117,10 @@ Separazione logica del codice Python:
 - `db`: connessione, schema e bootstrap SQLite;
 - `hardware`: adattatori verso Arduino, seriale e dispositivi;
 - `services`: logica applicativa e orchestrazione.
+
+Roadmap operativa:
+
+- `TODO.md`: prossimi step, priorita', decisioni aperte e cose da non anticipare.
 
 ## Regole di sviluppo
 
@@ -248,9 +253,13 @@ Serra v2 deve essere:
 - costruita per iterazioni piccole e pulite.
 
 L'interfaccia futura deve essere uno strumento operativo, non una pagina decorativa.
+La direzione prevista e' una dashboard usabile da tablet o piccolo schermo touch,
+con controlli chiari e layout pensato per l'uso vicino alla serra.
 La home statica `web/index.html` e il virtualhost `deploy/apache/serra_v2.conf`
 sono una pagina di cortesia provvisoria per Apache: non rappresentano ancora la
 scelta dell'interfaccia applicativa definitiva.
+Telegram e' una integrazione opzionale per notifiche: non deve diventare una
+dipendenza necessaria per il funzionamento locale della serra.
 L'automazione deve essere prevedibile e sempre tracciabile tramite log/eventi.
 La modalita' manuale deve poter intervenire in modo chiaro e controllato.
 

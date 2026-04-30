@@ -74,6 +74,12 @@ ancora scelta: verra' progettata dopo aver stabilizzato dominio, database e hard
 La strategia consigliata e' descritta in [docs/git-workflow.md](docs/git-workflow.md).
 In breve: `main` sempre stabile, branch brevi per feature/fix, commit piccoli e descrittivi.
 
+## Roadmap
+
+I prossimi step operativi sono raccolti in [TODO.md](TODO.md).
+Le priorita' attuali sono interfaccia touch/tablet e notifiche Telegram, dopo
+avere stabilizzato stato applicativo, database, eventi e hardware.
+
 ## Ambiente Raspberry
 
 L'ambiente preparato sul Raspberry attuale e' documentato in
