@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Serra v2 e' in costruzione: mini serra smart con Raspberry Pi e Arduino."
+    >
+    <title>Serra in costruzione</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --leaf: #2f7d4f;
+        --leaf-dark: #1f5138;
+        --mint: #dff4e8;
+        --sky: #d9ecf7;
+        --soil: #6f5238;
+        --amber: #d79b33;
+        --ink: #203028;
+        --muted: #5e6d65;
+        --paper: #fffdf8;
+        --line: rgba(32, 48, 40, 0.16);
+        --shadow: rgba(29, 55, 41, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          linear-gradient(180deg, rgba(217, 236, 247, 0.82), rgba(255, 253, 248, 0.92) 52%),
+          var(--paper);
+      }
+
+      main {
+        display: grid;
+        min-height: 100vh;
+        grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+        align-items: center;
+        gap: clamp(28px, 6vw, 88px);
+        padding: clamp(28px, 6vw, 72px);
+        overflow: hidden;
+      }
+
+      .copy {
+        max-width: 680px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 20px;
+        color: var(--leaf-dark);
+        font-size: 0.82rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0;
+      }
+
+      .eyebrow::before {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--amber);
+        box-shadow: 0 0 0 6px rgba(215, 155, 51, 0.18);
+        content: "";
+      }
+
+      h1 {
+        max-width: 10ch;
+        margin: 0;
+        font-size: clamp(3.4rem, 9vw, 8.4rem);
+        line-height: 0.9;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 58ch;
+        margin: 24px 0 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2vw, 1.28rem);
+        line-height: 1.6;
+      }
+
+      .status {
+        display: grid;
+        width: min(100%, 560px);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 34px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--line);
+        box-shadow: 0 18px 50px var(--shadow);
+      }
+
+      .status div {
+        min-width: 0;
+        padding: 18px;
+        background: rgba(255, 253, 248, 0.82);
+      }
+
+      .status strong,
+      .status span {
+        display: block;
+      }
+
+      .status strong {
+        color: var(--leaf-dark);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0;
+      }
+
+      .status span {
+        margin-top: 7px;
+        color: var(--ink);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .scene {
+        position: relative;
+        min-height: min(68vh, 620px);
+      }
+
+      .sun {
+        position: absolute;
+        top: 4%;
+        right: 10%;
+        width: clamp(76px, 12vw, 128px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(circle at 34% 32%, #fff5b8 0 14%, #e4b148 15% 100%);
+        box-shadow: 0 20px 54px rgba(215, 155, 51, 0.32);
+      }
+
+      .greenhouse {
+        position: absolute;
+        right: 0;
+        bottom: 9%;
+        width: min(92vw, 620px);
+        aspect-ratio: 1.2;
+      }
+
+      .roof {
+        position: absolute;
+        inset: 7% 11% 47%;
+        border: 8px solid rgba(31, 81, 56, 0.86);
+        border-bottom: 0;
+        transform: skewX(-18deg);
+        background:
+          linear-gradient(90deg, transparent 48%, rgba(31, 81, 56, 0.22) 49% 51%, transparent 52%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(223, 244, 232, 0.38));
+      }
+
+      .house {
+        position: absolute;
+        inset: 37% 6% 14%;
+        border: 8px solid rgba(31, 81, 56, 0.86);
+        background:
+          linear-gradient(90deg, transparent 31%, rgba(31, 81, 56, 0.18) 32% 34%, transparent 35%),
+          linear-gradient(90deg, transparent 65%, rgba(31, 81, 56, 0.18) 66% 68%, transparent 69%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(223, 244, 232, 0.5));
+      }
+
+      .bed {
+        position: absolute;
+        right: 1%;
+        bottom: 4%;
+        left: 0;
+        height: 15%;
+        border-radius: 999px 999px 8px 8px;
+        background: linear-gradient(180deg, #836041, var(--soil));
+        box-shadow: inset 0 12px 22px rgba(255, 255, 255, 0.12);
+      }
+
+      .sprout {
+        position: absolute;
+        bottom: 18%;
+        width: 9%;
+        height: 31%;
+        border-left: 7px solid var(--leaf);
+        transform-origin: bottom;
+      }
+
+      .sprout::before,
+      .sprout::after {
+        position: absolute;
+        width: 54%;
+        height: 28%;
+        border-radius: 100% 0 100% 0;
+        background: var(--leaf);
+        content: "";
+      }
+
+      .sprout::before {
+        left: -58%;
+        top: 32%;
+        transform: rotate(-28deg);
+      }
+
+      .sprout::after {
+        left: 4%;
+        top: 18%;
+        transform: scaleX(-1) rotate(-28deg);
+      }
+
+      .sprout.one {
+        left: 22%;
+        transform: scale(0.82);
+      }
+
+      .sprout.two {
+        left: 44%;
+      }
+
+      .sprout.three {
+        left: 68%;
+        transform: scale(0.72);
+      }
+
+      .sensor {
+        position: absolute;
+        right: 19%;
+        bottom: 25%;
+        width: 72px;
+        height: 116px;
+        border: 6px solid var(--leaf-dark);
+        border-radius: 8px;
+        background: rgba(255, 253, 248, 0.82);
+      }
+
+      .sensor::before {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--amber);
+        transform: translateX(-50%);
+        content: "";
+      }
+
+      .sensor::after {
+        position: absolute;
+        right: 18px;
+        bottom: 14px;
+        left: 18px;
+        height: 34px;
+        border-radius: 999px;
+        background: var(--sky);
+        content: "";
+      }
+
+      @media (max-width: 820px) {
+        main {
+          grid-template-columns: 1fr;
+          align-content: center;
+          padding: 28px;
+        }
+
+        h1 {
+          max-width: 9ch;
+        }
+
+        .scene {
+          min-height: 340px;
+          order: -1;
+        }
+
+        .greenhouse {
+          right: 50%;
+          width: min(90vw, 430px);
+          transform: translateX(50%);
+        }
+      }
+
+      @media (max-width: 560px) {
+        .status {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="copy" aria-label="Stato progetto">
+        <p class="eyebrow">Serra v2</p>
+        <h1>Serra in costruzione</h1>
+        <p class="subtitle">
+          La mini serra smart sta prendendo forma: Raspberry Pi, Arduino,
+          sensori e automazioni stanno crescendo una parte alla volta.
+        </p>
+        <div class="status" aria-label="Stato dei lavori">
+          <div>
+            <strong>Backend</strong>
+            <span>Python</span>
+          </div>
+          <div>
+            <strong>Hardware</strong>
+            <span>Arduino</span>
+          </div>
+          <div>
+            <strong>Database</strong>
+            <span>SQLite</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" aria-label="Illustrazione della serra">
+        <div class="sun" aria-hidden="true"></div>
+        <div class="greenhouse" aria-hidden="true">
+          <div class="roof"></div>
+          <div class="house"></div>
+          <div class="sprout one"></div>
+          <div class="sprout two"></div>
+          <div class="sprout three"></div>
+          <div class="sensor"></div>
+          <div class="bed"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

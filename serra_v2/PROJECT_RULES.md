@@ -105,6 +105,7 @@ serra_v2/
   scripts/                  Script operativi
   src/serra_v2/             Codice Python applicativo
   tests/                    Test unitari e integrazione
+  web/                      Home statica provvisoria per Apache
 ```
 
 Separazione logica del codice Python:
@@ -146,6 +147,7 @@ Script attuali:
 ./scripts/status.sh              # stampa lo stato applicativo iniziale
 ./scripts/check.sh               # esegue test e lint
 ./scripts/sync_to_raspberry.sh   # (da PC) sync del codice verso Raspberry via rsync/ssh
+./scripts/deploy_home.sh         # (su Raspberry) installa la home statica in Apache
 ```
 
 Flusso sviluppo locale consigliato (PC):
@@ -244,6 +246,8 @@ Serra v2 deve essere:
 - costruita per iterazioni piccole e pulite.
 
 L'interfaccia futura deve essere uno strumento operativo, non una pagina decorativa.
+La home statica `web/index.html` e' una pagina di cortesia provvisoria per Apache:
+non rappresenta ancora la scelta dell'interfaccia applicativa definitiva.
 L'automazione deve essere prevedibile e sempre tracciabile tramite log/eventi.
 La modalita' manuale deve poter intervenire in modo chiaro e controllato.
 

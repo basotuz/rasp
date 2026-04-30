@@ -91,6 +91,24 @@ Per allineare anche cancellando file sul Raspberry (attenzione):
 ./scripts/sync_to_raspberry.sh --delete
 ```
 
+## Home provvisoria Apache
+
+La pagina statica "Serra in costruzione" e' versionata in:
+
+```text
+web/index.html
+```
+
+Sul Raspberry puo' essere installata come home Apache con:
+
+```bash
+cd /home/baso/serra_v2
+./scripts/deploy_home.sh
+```
+
+Questa home e' solo una pagina di cortesia: non introduce ancora una scelta
+definitiva sull'interfaccia applicativa.
+
 ## Stato del progetto
 
 Questa e' una base iniziale professionale. Il codice applicativo e' volutamente minimale:

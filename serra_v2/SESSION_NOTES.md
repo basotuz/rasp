@@ -152,3 +152,9 @@ git diff --staged
 - Spostato il progetto sul Raspberry in `/home/baso/serra_v2`.
 - Aggiornato lo script `scripts/sync_to_raspberry.sh` per sincronizzare verso `/home/baso/serra_v2` di default.
 - Verificati su Raspberry: `./scripts/bootstrap_db.sh`, `./scripts/status.sh` (db creato e status OK).
+
+### 2026-04-30 - Home provvisoria Apache
+
+- Aggiunta pagina statica `web/index.html` come home di cortesia "Serra in costruzione".
+- Aggiunto `scripts/deploy_home.sh` per installare la pagina in `/var/www/html/index.html`.
+- Decisione confermata: la pagina statica non rappresenta ancora la scelta dell'interfaccia applicativa definitiva.
