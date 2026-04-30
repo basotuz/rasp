@@ -9,7 +9,7 @@ Il progetto nasce con una base piccola, ma organizzata per crescere senza divent
 - Monitoraggio umidita' terreno
 - Irrigazione automatica
 - Apertura e chiusura tetto
-- Dashboard web Flask
+- Interfaccia operativa futura, da scegliere piu' avanti
 - Modalita' AUTO e MANUALE
 - Log eventi
 - Predisposizione notifiche Telegram
@@ -21,7 +21,6 @@ Il progetto nasce con una base piccola, ma organizzata per crescere senza divent
 - Raspberry Pi come master
 - Arduino come slave
 - Python backend
-- Flask dashboard
 - SQLite come database iniziale
 - Comunicazione seriale USB Raspberry <-> Arduino
 
@@ -46,14 +45,11 @@ cd ~/Documenti/MIA/VSCODE/rasp/serra_v2
 ./scripts/setup_venv.sh
 source .venv/bin/activate
 ./scripts/bootstrap_db.sh
-./scripts/run_dev.sh
+./scripts/status.sh
 ```
 
-Dashboard locale:
-
-```text
-http://127.0.0.1:5000
-```
+`scripts/status.sh` stampa lo stato applicativo iniziale in JSON. L'interfaccia utente non e'
+ancora scelta: verra' progettata dopo aver stabilizzato dominio, database e hardware.
 
 ## Workflow Git
 
@@ -63,4 +59,4 @@ In breve: `main` sempre stabile, branch brevi per feature/fix, commit piccoli e 
 ## Stato del progetto
 
 Questa e' una base iniziale professionale. Il codice applicativo e' volutamente minimale:
-serve a verificare setup, import, database e dashboard senza anticipare logiche hardware definitive.
+serve a verificare setup, import, database e stato applicativo senza anticipare logiche hardware definitive.

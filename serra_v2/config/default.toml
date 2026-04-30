@@ -3,11 +3,6 @@ name = "Serra v2"
 environment = "development"
 mode = "AUTO"
 
-[server]
-host = "127.0.0.1"
-port = 5000
-debug = true
-
 [database]
 path = "data/serra_v2.sqlite3"
 

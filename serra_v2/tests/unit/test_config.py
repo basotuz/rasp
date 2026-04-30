@@ -5,5 +5,5 @@ def test_load_settings_defaults():
     settings = load_settings()
 
     assert settings.environment == "development"
-    assert settings.host == "127.0.0.1"
-    assert settings.port == 5000
+    assert settings.serial_port == "/dev/ttyACM0"
+    assert settings.mode == "AUTO"

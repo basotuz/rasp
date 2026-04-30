@@ -16,7 +16,7 @@ L'obiettivo e' costruire un sistema semplice da usare, affidabile e scalabile, c
 - leggere umidita' terreno;
 - gestire irrigazione automatica;
 - gestire apertura e chiusura del tetto;
-- offrire controllo manuale da dashboard web;
+- offrire controllo manuale da un'interfaccia operativa futura;
 - supportare modalita' AUTO e MANUALE;
 - registrare eventi e comandi;
 - predisporre notifiche Telegram future;
@@ -33,7 +33,6 @@ Raspberry Pi e' il master del sistema.
 Responsabilita':
 
 - eseguire il backend Python;
-- servire la dashboard Flask;
 - mantenere lo stato applicativo;
 - salvare dati ed eventi su SQLite;
 - decidere automazioni in modalita' AUTO;
@@ -60,7 +59,6 @@ La direzione preferita e' JSON Lines: un messaggio JSON per riga.
 ## Stack tecnologico
 
 - Python come linguaggio backend principale;
-- Flask per dashboard web e API HTTP;
 - SQLite come database iniziale;
 - pyserial per comunicazione USB seriale;
 - Arduino IDE / firmware `.ino` per lo slave;
@@ -100,8 +98,6 @@ serra_v2/
 
 Separazione logica del codice Python:
 
-- `api`: endpoint HTTP;
-- `web`: dashboard Flask, template e statici;
 - `core`: configurazione, modelli e regole centrali;
 - `db`: connessione, schema e bootstrap SQLite;
 - `hardware`: adattatori verso Arduino, seriale e dispositivi;
@@ -111,11 +107,11 @@ Separazione logica del codice Python:
 
 - Prima di lavorare, leggere questo file e controllare `git status`.
 - Tenere tutto il progetto dentro `serra_v2/`.
-- Non spostare logiche applicative dentro i template Flask.
-- Non far dipendere il dominio direttamente da Flask, SQLite o seriale.
+- Non introdurre framework di interfaccia prima di aver scelto consapevolmente la direzione.
+- Non far dipendere il dominio direttamente da interfaccia, SQLite o seriale.
 - Tenere Arduino semplice: esecuzione hardware, non logica applicativa complessa.
 - Separare sempre:
-  - interfaccia web;
+  - interfaccia utente futura;
   - logica applicativa;
   - persistenza database;
   - comunicazione hardware.
@@ -134,7 +130,7 @@ Script attuali:
 ```bash
 ./scripts/setup_venv.sh       # crea virtualenv e installa dipendenze
 ./scripts/bootstrap_db.sh     # crea/aggiorna database SQLite locale
-./scripts/run_dev.sh          # avvia Flask in sviluppo
+./scripts/status.sh           # stampa lo stato applicativo iniziale
 ./scripts/check.sh            # esegue test e lint
 ```
 
@@ -145,7 +141,7 @@ cd ~/Documenti/MIA/VSCODE/rasp/serra_v2
 ./scripts/setup_venv.sh
 source .venv/bin/activate
 ./scripts/bootstrap_db.sh
-./scripts/run_dev.sh
+./scripts/status.sh
 ```
 
 ## Convenzioni Git e commit
@@ -178,7 +174,7 @@ fix: corregge timeout comunicazione seriale
 docs: aggiorna regole progetto
 chore: prepara struttura iniziale serra v2
 test: aggiunge test bootstrap database
-refactor: separa servizio serra da API Flask
+refactor: separa servizio serra da entrypoint operativo
 ```
 
 ### Quando committare
@@ -189,7 +185,7 @@ Esempi di commit sensati:
 - struttura iniziale del progetto;
 - setup ambiente;
 - schema database;
-- dashboard base;
+- entrypoint stato applicativo;
 - protocollo seriale;
 - integrazione sensori;
 - log eventi;
@@ -223,14 +219,14 @@ Serra v2 deve essere:
 - pronta a integrare hardware reale senza riscritture traumatiche;
 - costruita per iterazioni piccole e pulite.
 
-La dashboard deve essere uno strumento operativo, non una pagina decorativa.
+L'interfaccia futura deve essere uno strumento operativo, non una pagina decorativa.
 L'automazione deve essere prevedibile e sempre tracciabile tramite log/eventi.
 La modalita' manuale deve poter intervenire in modo chiaro e controllato.
 
 ## Cose da evitare
 
 - Non mettere codice finale prematuro prima di aver definito contratti e hardware.
-- Non mescolare logica web, logica serra e accesso hardware nello stesso file.
+- Non mescolare logica interfaccia, logica serra e accesso hardware nello stesso file.
 - Non salvare database, log, `.env`, virtualenv o file temporanei in Git.
 - Non usare commit generici come `update`, `fix stuff`, `prove`.
 - Non introdurre MQTT, Telegram o Home Assistant prima di avere una base locale stabile.
@@ -243,12 +239,11 @@ La modalita' manuale deve poter intervenire in modo chiaro e controllato.
 
 ### V1 - Base locale funzionante
 
-Obiettivo: sistema avviabile in locale/Raspberry con dashboard, database e struttura stabile.
+Obiettivo: sistema avviabile in locale/Raspberry con database, stato applicativo e struttura stabile.
 
 - struttura progetto professionale;
 - virtualenv e script setup;
-- Flask dashboard base;
-- API health/status;
+- entrypoint CLI per stato applicativo;
 - SQLite bootstrap;
 - schema iniziale per letture sensori, eventi e comandi;
 - firmware Arduino placeholder;
@@ -267,7 +262,7 @@ Obiettivo: controllo reale di sensori e attuatori con modalita' AUTO/MANUALE.
 - lettura umidita' terreno;
 - controllo pompa;
 - controllo tetto;
-- dashboard manuale con comandi;
+- interfaccia manuale con comandi;
 - regole AUTO configurabili;
 - log eventi completo;
 - gestione errori seriale e fallback sicuro.
@@ -284,7 +279,7 @@ Obiettivo: rendere Serra v2 integrabile, notificabile e piu' intelligente.
 - fertilizzazione automatizzata;
 - backup database;
 - deploy come servizio systemd su Raspberry;
-- autenticazione dashboard se esposta in rete;
+- autenticazione interfaccia se esposta in rete;
 - esportazione dati;
 - hardening operativo.
 

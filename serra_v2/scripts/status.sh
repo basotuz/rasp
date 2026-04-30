@@ -11,5 +11,4 @@ fi
 
 PYTHON="${PYTHON:-$DEFAULT_PYTHON}"
 
-PYTHONPATH="$PROJECT_DIR/src" "$PYTHON" -m pytest
-PYTHONPATH="$PROJECT_DIR/src" "$PYTHON" -m ruff check src tests
+PYTHONPATH="$PROJECT_DIR/src" "$PYTHON" -m serra_v2

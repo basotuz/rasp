@@ -33,14 +33,14 @@ Se `.venv` non esiste ancora:
 ## Stato attuale
 
 - Progetto: `serra_v2`, mini serra smart con Raspberry Pi master e Arduino slave.
-- Stack previsto: Python, Flask, SQLite, pyserial, pytest, Ruff.
-- Dashboard locale prevista su `http://127.0.0.1:5000`.
+- Stack previsto: Python, SQLite, pyserial, pytest, Ruff.
+- Interfaccia utente rimandata: non usare Flask nella base attuale.
 - La base iniziale e' volutamente minimale e pensata per crescere in modo ordinato.
 - `PROJECT_RULES.md` va letto prima di prendere decisioni tecniche.
 
 ## Decisioni gia' prese
 
-- Raspberry Pi contiene backend, dashboard, stato applicativo, database e automazioni.
+- Raspberry Pi contiene backend, stato applicativo, database e automazioni.
 - Arduino resta semplice: sensori, attuatori e comandi ricevuti via seriale.
 - Comunicazione Raspberry <-> Arduino via seriale USB.
 - Protocollo seriale preferito: JSON Lines, da definire in `docs/serial-protocol.md`.
@@ -52,10 +52,10 @@ Se `.venv` non esiste ancora:
 
 - Verificare setup ambiente con `./scripts/setup_venv.sh`.
 - Inizializzare database con `./scripts/bootstrap_db.sh`.
-- Avviare dashboard con `./scripts/run_dev.sh`.
+- Verificare stato applicativo con `./scripts/status.sh`.
 - Eseguire controlli con `./scripts/check.sh`.
 - Definire meglio il protocollo seriale in `docs/serial-protocol.md`.
-- Iniziare dai moduli piccoli: configurazione, database, dashboard base, poi hardware.
+- Iniziare dai moduli piccoli: configurazione, database, stato applicativo, poi hardware.
 - Recuperare dalla Serra V1 gli script citati in `docs/v1-systemd-services.md`.
 - Schema MariaDB V1 di `dati` e `stati` acquisito in `docs/v1-database.md`.
 - Recuperare significato dei canali V1 `L1`, `L2`, `R1`, `R2`, `S1`, `F1`, `V1`.
@@ -67,7 +67,7 @@ cd ~/Documenti/MIA/VSCODE/rasp/serra_v2
 ./scripts/setup_venv.sh
 source .venv/bin/activate
 ./scripts/bootstrap_db.sh
-./scripts/run_dev.sh
+./scripts/status.sh
 ./scripts/check.sh
 ```
 
@@ -99,3 +99,16 @@ git diff --staged
 - Aggiunta nota sul database MariaDB della Serra V1 in `docs/v1-database.md`.
 - Aggiornato schema V1 reale: tabella `dati` con 333045 letture e tabella `stati` con 1 riga di stato/configurazione.
 - Chiusura sessione: repository allineato a GitHub; prossimo passo consigliato e' recuperare gli script V1 per mappare i canali `L1`, `L2`, `R1`, `R2`, `S1`, `F1`, `V1`.
+
+### 2026-04-30
+
+- Riletto `PROJECT_RULES.md`, `SESSION_NOTES.md` e struttura del progetto.
+- Installato pacchetto di sistema `python3.13-venv`, necessario per creare `.venv`.
+- Creato virtualenv e installate dipendenze dev con `./scripts/setup_venv.sh`.
+- Corretto lint Ruff in `src/serra_v2/__main__.py`.
+- Aggiornati `scripts/check.sh` e `scripts/bootstrap_db.sh`: ora usano automaticamente `.venv/bin/python` se disponibile, mantenendo l'override `PYTHON=...`.
+- Rimossa la base Flask su decisione progettuale: l'interfaccia si scegliera' piu' avanti.
+- Aggiunto `scripts/status.sh` per verificare lo stato applicativo da CLI.
+- Rimossi `SERRA_HOST`, `SERRA_PORT` e la sezione `[server]` dalla configurazione.
+- Verificato `./scripts/check.sh`: test passati e Ruff senza errori.
+- Verificato `./scripts/bootstrap_db.sh`: database creato/aggiornato in `data/serra_v2.sqlite3`.

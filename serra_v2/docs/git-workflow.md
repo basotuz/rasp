@@ -4,7 +4,7 @@
 
 - `main`: sempre stabile, avviabile e pronta per il Raspberry.
 - `develop`: opzionale quando il progetto avra' piu' feature in parallelo.
-- `feature/<nome>`: nuove funzionalita', per esempio `feature/dashboard-manuale`.
+- `feature/<nome>`: nuove funzionalita', per esempio `feature/comandi-manuali`.
 - `fix/<nome>`: correzioni mirate, per esempio `fix/serial-timeout`.
 - `chore/<nome>`: manutenzione, setup, documentazione, tooling.
 
@@ -15,7 +15,7 @@ Per ora puoi lavorare con `main` + branch brevi. Introduci `develop` solo quando
 Usa commit in stile Conventional Commits:
 
 ```text
-feat: aggiunge dashboard manuale
+feat: aggiunge comandi manuali
 fix: corregge bootstrap database
 docs: documenta protocollo seriale
 chore: aggiorna struttura progetto
@@ -30,7 +30,7 @@ Fai commit quando una modifica e' coerente e verificabile:
 - struttura iniziale progetto
 - setup ambiente e script
 - schema database
-- prima dashboard
+- primo entrypoint operativo
 - protocollo seriale
 - integrazione sensori
 - automazione irrigazione

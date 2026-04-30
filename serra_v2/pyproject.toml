@@ -1,10 +1,9 @@
 [project]
 name = "serra-v2"
 version = "0.1.0"
-description = "Mini serra smart con Raspberry Pi, Arduino, Flask e SQLite."
+description = "Mini serra smart con Raspberry Pi, Arduino, Python e SQLite."
 requires-python = ">=3.11"
 dependencies = [
-  "Flask==3.0.3",
   "pyserial==3.5",
   "python-dotenv==1.0.1",
 ]
