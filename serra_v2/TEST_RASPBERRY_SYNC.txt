@@ -1,0 +1,4 @@
+Test file creato per verificare sincronizzazione su Raspberry e push Git.
+
+Creato il: 2026-05-01
+Percorso previsto sul Raspberry: /home/baso/serra_v2/TEST_RASPBERRY_SYNC.txt
