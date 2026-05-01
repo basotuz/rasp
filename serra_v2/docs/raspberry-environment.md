@@ -1,8 +1,8 @@
 # Ambiente Raspberry
 
 Questa nota descrive l'ambiente preparato sul Raspberry corrente per Serra v2.
-Serve come riferimento operativo: il codice applicativo resta Python e, per ora,
-usa SQLite come database iniziale.
+Serve come riferimento operativo: il codice applicativo resta Python e usa
+SQLite come database iniziale. La UI/API locale scelta per Serra v2 e' Flask.
 
 ## Host corrente
 
@@ -85,15 +85,14 @@ Risultati attesi:
 
 ## Decisione attuale
 
-Apache, PHP e MariaDB sono installati e disponibili sul Raspberry, ma non sono
-ancora dipendenze applicative di Serra v2.
-
-La base applicativa resta:
+Apache, PHP e MariaDB sono installati e disponibili sul Raspberry, ma la base
+applicativa scelta per Serra v2 e':
 
 - Python per backend/logica serra;
+- Flask per dashboard operativa locale ed endpoint HTTP;
 - SQLite come database iniziale;
 - pyserial per comunicazione Raspberry <-> Arduino.
 
-L'interfaccia utente verra' scelta piu' avanti. Se si decidera' di usare Apache,
-PHP o MariaDB nel progetto applicativo, la decisione andra' riportata in
-`PROJECT_RULES.md` insieme alle modifiche di codice e configurazione.
+Apache puo' restare un supporto operativo per virtualhost, pagina di cortesia o
+reverse proxy davanti a Flask. PHP e MariaDB non sono dipendenze applicative
+necessarie nella direzione corrente del progetto.

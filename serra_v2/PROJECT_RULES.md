@@ -16,7 +16,7 @@ L'obiettivo e' costruire un sistema semplice da usare, affidabile e scalabile, c
 - leggere umidita' terreno;
 - gestire irrigazione automatica;
 - gestire apertura e chiusura del tetto;
-- offrire controllo manuale da un'interfaccia operativa futura;
+- offrire controllo manuale da una dashboard operativa Flask;
 - supportare modalita' AUTO e MANUALE;
 - registrare eventi e comandi;
 - predisporre notifiche Telegram future;
@@ -59,10 +59,12 @@ La direzione preferita e' JSON Lines: un messaggio JSON per riga.
 ## Stack tecnologico
 
 - Python come linguaggio backend principale;
+- Flask come stack scelto per dashboard operativa ed endpoint HTTP locali;
 - SQLite come database iniziale;
 - pyserial per comunicazione USB seriale;
 - Apache, PHP e MariaDB installati sul Raspberry come servizi disponibili,
-  ma non ancora dipendenze applicative di Serra v2;
+  con Apache riutilizzabile come supporto operativo o reverse proxy e PHP/MariaDB
+  non dipendenze applicative di Serra v2;
 - Arduino IDE / firmware `.ino` per lo slave;
 - pytest per test;
 - Ruff per linting;
@@ -126,13 +128,14 @@ Roadmap operativa:
 
 - Prima di lavorare, leggere questo file e controllare `git status`.
 - Tenere tutto il progetto dentro `serra_v2/`.
-- Non introdurre framework di interfaccia prima di aver scelto consapevolmente la direzione.
+- Usare Flask come stack UI/API di riferimento; non introdurre altri framework web
+  senza una decisione esplicita.
 - Non far dipendere il dominio direttamente da interfaccia, SQLite o seriale.
 - Non spostare il database applicativo da SQLite a MariaDB/MySQL senza una
   decisione esplicita e relativa migrazione documentata.
 - Tenere Arduino semplice: esecuzione hardware, non logica applicativa complessa.
 - Separare sempre:
-  - interfaccia utente futura;
+  - route/template/UI Flask;
   - logica applicativa;
   - persistenza database;
   - comunicazione hardware.
@@ -252,12 +255,12 @@ Serra v2 deve essere:
 - pronta a integrare hardware reale senza riscritture traumatiche;
 - costruita per iterazioni piccole e pulite.
 
-L'interfaccia futura deve essere uno strumento operativo, non una pagina decorativa.
-La direzione prevista e' una dashboard usabile da tablet o piccolo schermo touch,
+L'interfaccia deve essere uno strumento operativo, non una pagina decorativa.
+La direzione scelta e' una dashboard Flask usabile da tablet o piccolo schermo touch,
 con controlli chiari e layout pensato per l'uso vicino alla serra.
 La home statica `web/index.html` e il virtualhost `deploy/apache/serra_v2.conf`
-sono una pagina di cortesia provvisoria per Apache: non rappresentano ancora la
-scelta dell'interfaccia applicativa definitiva.
+restano una pagina di cortesia provvisoria per Apache finche' l'app Flask non
+viene aggiunta al progetto.
 Telegram e' una integrazione opzionale per notifiche: non deve diventare una
 dipendenza necessaria per il funzionamento locale della serra.
 L'automazione deve essere prevedibile e sempre tracciabile tramite log/eventi.
@@ -267,6 +270,7 @@ La modalita' manuale deve poter intervenire in modo chiaro e controllato.
 
 - Non mettere codice finale prematuro prima di aver definito contratti e hardware.
 - Non mescolare logica interfaccia, logica serra e accesso hardware nello stesso file.
+- Non mettere logica operativa dentro route Flask, template o JavaScript della dashboard.
 - Non salvare database, log, `.env`, virtualenv o file temporanei in Git.
 - Non usare commit generici come `update`, `fix stuff`, `prove`.
 - Non introdurre MQTT, Telegram o Home Assistant prima di avere una base locale stabile.
@@ -289,6 +293,7 @@ Obiettivo: sistema avviabile in locale/Raspberry con database, stato applicativo
 - schema iniziale per letture sensori, eventi e comandi;
 - firmware Arduino placeholder;
 - protocollo seriale documentato a livello iniziale;
+- decisione documentata su Flask come stack UI/API;
 - test minimi;
 - workflow Git pulito.
 
@@ -303,7 +308,7 @@ Obiettivo: controllo reale di sensori e attuatori con modalita' AUTO/MANUALE.
 - lettura umidita' terreno;
 - controllo pompa;
 - controllo tetto;
-- interfaccia manuale con comandi;
+- interfaccia manuale con comandi via Flask;
 - regole AUTO configurabili;
 - log eventi completo;
 - gestione errori seriale e fallback sicuro.

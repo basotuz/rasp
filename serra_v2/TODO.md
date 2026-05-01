@@ -25,10 +25,12 @@ Step proposti:
 - Definire gli stati di sicurezza:
   hardware non raggiungibile, lettura sensore vecchia, comando fallito,
   automazione disabilitata.
-- Scegliere consapevolmente lo stack UI:
-  pagina statica evoluta, backend Python leggero, oppure integrazione web diversa.
+- Confermare il perimetro della prima app Flask:
+  dashboard locale, endpoint di stato e comandi manuali minimi.
 - Separare API/servizi dalla UI:
   la dashboard deve consumare stato e comandi, non contenere logica serra.
+- Preparare la struttura Flask iniziale:
+  app factory, blueprint o route minime, template e cartella `static/`.
 - Progettare layout touch-first:
   pulsanti grandi, contrasto alto, poche schermate, nessun testo troppo piccolo.
 - Preparare una prima pagina dashboard locale:
@@ -61,7 +63,6 @@ Step proposti:
 
 ## Decisioni da prendere
 
-- Stack della dashboard operativa.
 - Dimensione e risoluzione target del display touch.
 - Se la UI deve girare solo in LAN o anche da remoto.
 - Eventuali utenti/autenticazione per i comandi manuali.
@@ -71,6 +72,7 @@ Step proposti:
 ## Non fare ancora
 
 - Non introdurre una UI complessa prima di avere contratti chiari per stato e comandi.
+- Non mettere logica serra dentro route Flask, template o JavaScript.
 - Non mettere token Telegram nel repository.
 - Non rendere Telegram necessario per far funzionare la serra.
 - Non spostare la logica applicativa dentro pagine web o script Telegram.

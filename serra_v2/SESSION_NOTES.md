@@ -44,7 +44,7 @@ Se `.venv` non esiste ancora:
 - Progetto: `serra_v2`, mini serra smart con Raspberry Pi master e Arduino slave.
 - Stack previsto: Python, SQLite, pyserial, pytest, Ruff.
 - Sul Raspberry corrente sono installati anche Apache, PHP e MariaDB come servizi disponibili.
-- Interfaccia utente rimandata: non usare Flask nella base attuale.
+- Decisione aggiornata il 2026-05-01: usare Flask come stack UI/API del progetto.
 - La base iniziale e' volutamente minimale e pensata per crescere in modo ordinato.
 - `PROJECT_RULES.md` va letto prima di prendere decisioni tecniche.
 
@@ -173,3 +173,9 @@ git diff --staged
 - Aggiornati i riferimenti del Raspberry corrente: dispositivo `rasp3`, accesso SSH `baso@serra-v2`.
 - Allineati documentazione e script al nuovo host SSH predefinito `baso@serra-v2`.
 - Aggiornato il virtualhost Apache versionato con `ServerName serra-v2`.
+
+### 2026-05-01 - Decisione Flask ripristinata
+
+- Decisione aggiornata: Serra v2 usera' Flask per dashboard operativa ed endpoint HTTP locali.
+- Aggiornati `README.md`, `PROJECT_RULES.md`, `TODO.md`, `docs/architecture.md` e `docs/raspberry-environment.md`.
+- Chiarito che la scelta di Flask e' architetturale, ma l'app Flask non e' ancora implementata nel codice corrente.

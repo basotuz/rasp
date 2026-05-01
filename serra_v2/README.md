@@ -9,7 +9,7 @@ Il progetto nasce con una base piccola, ma organizzata per crescere senza divent
 - Monitoraggio umidita' terreno
 - Irrigazione automatica
 - Apertura e chiusura tetto
-- Interfaccia operativa futura, da scegliere piu' avanti
+- Dashboard operativa web basata su Flask
 - Modalita' AUTO e MANUALE
 - Log eventi
 - Predisposizione notifiche Telegram
@@ -21,12 +21,14 @@ Il progetto nasce con una base piccola, ma organizzata per crescere senza divent
 - Raspberry Pi come master
 - Arduino come slave
 - Python backend
+- Flask per UI/API locali
 - SQLite come database iniziale
 - Comunicazione seriale USB Raspberry <-> Arduino
 - Apache, PHP e MariaDB installati sul Raspberry come servizi disponibili
 
-La base applicativa resta Python + SQLite. Apache/PHP/MariaDB sono pronti sul
-Raspberry, ma l'interfaccia utente non e' ancora stata scelta.
+La direzione applicativa scelta e' Python + Flask + SQLite. Apache/PHP/MariaDB
+restano servizi disponibili sul Raspberry, ma Flask e' lo stack deciso per la
+dashboard operativa e per i futuri endpoint HTTP locali.
 
 ## Struttura
 
@@ -66,8 +68,9 @@ source .venv/bin/activate
 ./scripts/status.sh
 ```
 
-`scripts/status.sh` stampa lo stato applicativo iniziale in JSON. L'interfaccia utente non e'
-ancora scelta: verra' progettata dopo aver stabilizzato dominio, database e hardware.
+`scripts/status.sh` stampa lo stato applicativo iniziale in JSON. La scelta
+dello stack UI/API e' stata fatta: useremo Flask, mantenendo separati dominio,
+database e integrazione hardware.
 
 ## Workflow Git
 
@@ -77,8 +80,9 @@ In breve: `main` sempre stabile, branch brevi per feature/fix, commit piccoli e 
 ## Roadmap
 
 I prossimi step operativi sono raccolti in [TODO.md](TODO.md).
-Le priorita' attuali sono interfaccia touch/tablet e notifiche Telegram, dopo
-avere stabilizzato stato applicativo, database, eventi e hardware.
+Le priorita' attuali sono implementare la base Flask per dashboard touch/tablet
+e aggiungere notifiche Telegram, dopo avere stabilizzato stato applicativo,
+database, eventi e hardware.
 
 ## Ambiente Raspberry
 
@@ -123,8 +127,9 @@ cd /home/baso/serra_v2
 Lo script copia la pagina in `/var/www/serra_v2`, abilita il sito
 `serra_v2.conf`, disabilita `000-default.conf` e ricarica Apache.
 
-Questa home e' solo una pagina di cortesia: non introduce ancora una scelta
-definitiva sull'interfaccia applicativa.
+Questa home resta una pagina di cortesia temporanea. La scelta architetturale
+definitiva per l'interfaccia applicativa e' Flask, ma l'app Flask non e' ancora
+stata aggiunta al codice versionato.
 
 ## Stato del progetto
 
