@@ -191,4 +191,7 @@ git diff --staged
   - sensore suolo digitale letto su `GPIO 25`;
   - sensore suolo analogico letto da Arduino su `A0` e inviato via seriale a `9600` baud su `/dev/ttyACM0`.
 - Aggiornata la documentazione su struttura cartelle, protocollo seriale di test e ambiente Raspberry.
-- Rilevata discrepanza da correggere in `scripts/python/test_dht22.py`: commento `GPIO14`, codice `board.D22`.
+- Uniformati gli script hardware:
+  - parsing seriale corretto per il formato `soil=<percentuale>;raw=<valore>`;
+  - DHT22 allineato a `board.D22` (`BCM GPIO22`, `pin fisico 15`);
+  - naming e struttura resi piu' coerenti tra script Python e sketch Arduino.

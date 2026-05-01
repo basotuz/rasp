@@ -1,22 +1,23 @@
-int sensore = A0;
-
-int secco = 1023;
-int bagnato = 445;
+const int SOIL_SENSOR_PIN = A0;
+const int DRY_READING = 1023;
+const int WET_READING = 445;
+const unsigned long SERIAL_BAUDRATE = 9600;
+const unsigned long LOOP_DELAY_MS = 2000;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(SERIAL_BAUDRATE);
 }
 
 void loop() {
-  int valore = analogRead(sensore);
+  int rawValue = analogRead(SOIL_SENSOR_PIN);
 
-  int percentuale = map(valore, secco, bagnato, 0, 100);
-  percentuale = constrain(percentuale, 0, 100);
+  int soilPercent = map(rawValue, DRY_READING, WET_READING, 0, 100);
+  soilPercent = constrain(soilPercent, 0, 100);
 
   Serial.print("soil=");
-  Serial.print(percentuale);
+  Serial.print(soilPercent);
   Serial.print(";raw=");
-  Serial.println(valore);
+  Serial.println(rawValue);
 
-  delay(2000);
+  delay(LOOP_DELAY_MS);
 }

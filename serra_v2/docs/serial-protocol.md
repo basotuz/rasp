@@ -51,8 +51,8 @@ Lo schema definitivo verra' introdotto quando inizieremo il firmware e il backen
 Non tutto passa gia' da Arduino:
 
 - `scripts/python/test_dht22.py` prova il DHT22 direttamente dal Raspberry;
-- `scripts/python/test_DS18B20.py` prova il DS18B20 tramite 1-Wire Linux;
+- `scripts/python/test_ds18b20.py` prova il DS18B20 tramite 1-Wire Linux;
 - `scripts/python/test_soil_hum_d.py` prova l'uscita digitale del sensore suolo su `GPIO 25`.
 
-Nota: nel test DHT22 c'e' una discrepanza tra commento e codice. Il commento
-parla di `GPIO14`, mentre il codice istanzia `board.D22`.
+Nota: il test DHT22 ora e' allineato a `board.D22`, cioe' `BCM GPIO22`
+(`pin fisico 15`).

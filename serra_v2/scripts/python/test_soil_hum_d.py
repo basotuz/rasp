@@ -1,21 +1,28 @@
-import RPi.GPIO as GPIO
 import time
 
-PIN = 25
+import RPi.GPIO as GPIO
+
+SOIL_DIGITAL_PIN = 25
+POLL_INTERVAL_SECONDS = 1
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(PIN, GPIO.IN)
+GPIO.setup(SOIL_DIGITAL_PIN, GPIO.IN)
 
-try:
-    while True:
-        stato = GPIO.input(PIN)
 
-        if stato == 0:
-            print("💧 BAGNATO")
-        else:
-            print("🌵 SECCO")
+def main():
+    try:
+        while True:
+            state = GPIO.input(SOIL_DIGITAL_PIN)
 
-        time.sleep(1)
+            if state == 0:
+                print("BAGNATO")
+            else:
+                print("SECCO")
 
-except KeyboardInterrupt:
-    GPIO.cleanup()
+            time.sleep(POLL_INTERVAL_SECONDS)
+    finally:
+        GPIO.cleanup()
+
+
+if __name__ == "__main__":
+    main()

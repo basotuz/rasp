@@ -179,8 +179,7 @@ Pin e collegamenti da considerare documentati solo se confermati dal codice:
 
 - `GPIO 25` per la lettura digitale del sensore suolo (`test_soil_hum_d.py`);
 - `A0` Arduino per la lettura analogica del sensore suolo (`scripts/ino/soil/soil.ino`);
-- DHT22 con discrepanza tra commento e codice nel test attuale:
-  commento `GPIO14`, codice `board.D22`.
+- `BCM GPIO22` / `pin fisico 15` per il test DHT22 (`test_dht22.py`).
 
 Flusso sviluppo locale consigliato (PC):
 
@@ -298,8 +297,6 @@ La modalita' manuale deve poter intervenire in modo chiaro e controllato.
 - Non introdurre MQTT, Telegram o Home Assistant prima di avere una base locale stabile.
 - Non rendere Arduino responsabile di decisioni applicative complesse.
 - Non hardcodare pin, soglie o porte seriali dentro la logica centrale.
-- Se uno script di test hardware contiene una discrepanza tra commento e codice,
-  considerare il codice come riferimento temporaneo e allineare subito la documentazione.
 - Non cambiare struttura cartelle senza aggiornare questo file.
 - Non lasciare script rotti o non eseguibili.
 

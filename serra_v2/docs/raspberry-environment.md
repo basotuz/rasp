@@ -88,7 +88,7 @@ Risultati attesi:
 Nel repository sono ora presenti anche script manuali di bring-up hardware:
 
 - `scripts/python/test_dht22.py`
-- `scripts/python/test_DS18B20.py`
+- `scripts/python/test_ds18b20.py`
 - `scripts/python/test_soil_hum_d.py`
 - `scripts/python/test_soil_hum_a.py`
 - `scripts/ino/soil/soil.ino`
@@ -100,8 +100,7 @@ Informazioni osservate dai file:
 - porta seriale usata nei test: `/dev/ttyACM0`;
 - baud rate usato nei test: `9600`;
 - DS18B20 letto tramite filesystem 1-Wire Linux (`/sys/bus/w1/devices/28-*`);
-- DHT22 presente nei test lato Raspberry, con discrepanza da correggere tra
-  commento (`GPIO14`) e codice (`board.D22`).
+- DHT22 presente nei test lato Raspberry su `BCM GPIO22` (`pin fisico 15`).
 
 ## Decisione attuale
 

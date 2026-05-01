@@ -1,30 +1,41 @@
 import time
-import board
+
 import adafruit_dht
+import board
 
-# GPIO14 (pin fisico 8)
-dht = adafruit_dht.DHT22(board.D22, use_pulseio=False)
+DHT_SENSOR_PIN = board.D22  # BCM GPIO22, pin fisico 15
+POLL_INTERVAL_SECONDS = 2
 
-while True:
+
+def main():
+    dht = adafruit_dht.DHT22(DHT_SENSOR_PIN, use_pulseio=False)
+
     try:
-        temp = dht.temperature
-        hum = dht.humidity
+        while True:
+            try:
+                temperature_c = dht.temperature
+                humidity_percent = dht.humidity
 
-        if temp is not None and hum is not None:
-            print(f"🌡️ Temperatura: {temp:.1f} °C")
-            print(f"💧 Umidità: {hum:.1f} %")
-            print("RAW ->", temp, hum)
-            print("------")
-            
-        else:
-            print("⚠️ Nessun dato valido")
+                if temperature_c is not None and humidity_percent is not None:
+                    print(f"Temperatura: {temperature_c:.1f} C")
+                    print(f"Umidita: {humidity_percent:.1f} %")
+                    print("RAW ->", temperature_c, humidity_percent)
+                    print("------")
+                else:
+                    print("Nessun dato valido")
 
-    except RuntimeError as e:
-        # normale con DHT, ignora e riprova
-        print("Errore lettura (normale):", e)
+            except RuntimeError as exc:
+                # Normale con DHT: si riprova al ciclo successivo.
+                print("Errore lettura (normale):", exc)
 
-    except Exception as e:
-        print("Errore grave:", e)
-        break
+            except Exception as exc:
+                print("Errore grave:", exc)
+                break
 
-    time.sleep(2)
+            time.sleep(POLL_INTERVAL_SECONDS)
+    finally:
+        dht.exit()
+
+
+if __name__ == "__main__":
+    main()
