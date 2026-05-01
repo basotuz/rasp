@@ -43,7 +43,7 @@ Se `.venv` non esiste ancora:
 
 - Progetto: `serra_v2`, mini serra smart con Raspberry Pi master e Arduino slave.
 - Stack previsto: Python, SQLite, pyserial, pytest, Ruff.
-- Sul Raspberry attuale sono installati anche Apache, PHP e MariaDB come servizi disponibili.
+- Sul Raspberry corrente sono installati anche Apache, PHP e MariaDB come servizi disponibili.
 - Interfaccia utente rimandata: non usare Flask nella base attuale.
 - La base iniziale e' volutamente minimale e pensata per crescere in modo ordinato.
 - `PROJECT_RULES.md` va letto prima di prendere decisioni tecniche.
@@ -138,7 +138,7 @@ git diff --staged
 
 ### 2026-04-30 - Ambiente Raspberry
 
-- Preparato Raspberry attuale `baso@10.1.2.66` (`serra3`, Debian 13 trixie, aarch64).
+- Preparato Raspberry iniziale `baso@10.1.2.66` (`serra3`, Debian 13 trixie, aarch64).
 - Clonato progetto in `/home/baso/Documenti/MIA/VSCODE/rasp/serra_v2`.
 - Creato `.venv`, installate dipendenze Python e verificati `check`, `bootstrap_db` e `status`.
 - Installati pacchetti di sistema: `git`, `sqlite3`, `apache2`, `php`, `libapache2-mod-php`, `php-cli`, `php-mysql`, `mariadb-server`, `mariadb-client`.
@@ -167,3 +167,9 @@ git diff --staged
 - Priorita' future annotate: interfaccia operativa per tablet/piccolo schermo touch
   e notifiche Telegram opzionali.
 - Aggiornati `README.md` e `PROJECT_RULES.md` per puntare al TODO e chiarire la direzione.
+
+### 2026-05-01 - Cambio host Raspberry
+
+- Aggiornati i riferimenti del Raspberry corrente: dispositivo `rasp3`, accesso SSH `baso@serra-v2`.
+- Allineati documentazione e script al nuovo host SSH predefinito `baso@serra-v2`.
+- Aggiornato il virtualhost Apache versionato con `ServerName serra-v2`.

@@ -1,14 +1,15 @@
 # Ambiente Raspberry
 
-Questa nota descrive l'ambiente preparato sul Raspberry attuale per Serra v2.
+Questa nota descrive l'ambiente preparato sul Raspberry corrente per Serra v2.
 Serve come riferimento operativo: il codice applicativo resta Python e, per ora,
 usa SQLite come database iniziale.
 
-## Host attuale
+## Host corrente
 
 ```text
-SSH: baso@10.1.2.66
-Hostname: serra3
+Dispositivo: rasp3
+SSH: baso@serra-v2
+Hostname: serra-v2
 OS: Debian GNU/Linux 13 (trixie)
 Architettura: aarch64
 Python: 3.13.5
@@ -60,7 +61,7 @@ Apache ha una configurazione locale minima per evitare il warning sul nome host:
 
 ```text
 /etc/apache2/conf-available/servername.conf
-ServerName serra3
+ServerName serra-v2
 ```
 
 ## Progetto Serra v2

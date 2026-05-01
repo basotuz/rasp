@@ -82,7 +82,7 @@ avere stabilizzato stato applicativo, database, eventi e hardware.
 
 ## Ambiente Raspberry
 
-L'ambiente preparato sul Raspberry attuale e' documentato in
+L'ambiente preparato sul Raspberry corrente (`rasp3`, accesso `ssh baso@serra-v2`) e' documentato in
 [docs/raspberry-environment.md](docs/raspberry-environment.md).
 
 ## Sync PC -> Raspberry

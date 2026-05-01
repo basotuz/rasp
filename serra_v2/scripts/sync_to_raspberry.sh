@@ -8,7 +8,7 @@ set -euo pipefail
 # Uso:
 #   ./scripts/sync_to_raspberry.sh
 #   ./scripts/sync_to_raspberry.sh --delete
-#   SERRA_RASP_HOST="baso@10.1.2.66" SERRA_RASP_PATH="/home/baso/.../serra_v2" ./scripts/sync_to_raspberry.sh
+#   SERRA_RASP_HOST="baso@serra-v2" SERRA_RASP_PATH="/home/baso/.../serra_v2" ./scripts/sync_to_raspberry.sh
 #
 # Note:
 # - Di default NON usa --delete (evita di cancellare file sul Raspberry).
@@ -17,7 +17,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"  # .../rasp/serra_v2
 
-RASP_HOST="${SERRA_RASP_HOST:-baso@10.1.2.66}"
+RASP_HOST="${SERRA_RASP_HOST:-baso@serra-v2}"
 RASP_PATH="${SERRA_RASP_PATH:-/home/baso/serra_v2}"
 
 DELETE_MODE="false"
@@ -32,13 +32,13 @@ Uso:
   ./scripts/sync_to_raspberry.sh [--delete]
 
 Env:
-  SERRA_RASP_HOST  (default: baso@10.1.2.66)
+  SERRA_RASP_HOST  (default: baso@serra-v2)
   SERRA_RASP_PATH  (default: /home/baso/serra_v2)
 
 Esempi:
   ./scripts/sync_to_raspberry.sh
   ./scripts/sync_to_raspberry.sh --delete
-  SERRA_RASP_HOST="baso@10.1.2.66" ./scripts/sync_to_raspberry.sh
+  SERRA_RASP_HOST="baso@serra-v2" ./scripts/sync_to_raspberry.sh
 EOF
   exit 0
 fi

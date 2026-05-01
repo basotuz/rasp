@@ -103,7 +103,7 @@ serra_v2/
   deploy/                   File di deploy versionati
     apache/serra_v2.conf    Virtualhost Apache provvisorio
   docs/                     Documentazione tecnica
-    raspberry-environment.md Ambiente operativo del Raspberry attuale
+    raspberry-environment.md Ambiente operativo del Raspberry corrente
   logs/                     Log runtime locali
   scripts/                  Script operativi
   src/serra_v2/             Codice Python applicativo
