@@ -40,11 +40,27 @@ serra_v2/
   docs/                    Documentazione tecnica e workflow
   logs/                    Log runtime ignorati da Git
   deploy/                  File di deploy versionati
-  scripts/                 Script di setup, avvio e manutenzione
+  scripts/                 Script di setup, avvio, manutenzione e test hardware
+    python/                Prove sensori lato Raspberry
+    ino/                   Sketch Arduino di test
   src/serra_v2/            Codice Python applicativo
   tests/                   Test unitari e di integrazione
   web/                     Home statica provvisoria
 ```
+
+## Sensori e test hardware osservati
+
+Nei file attuali del progetto risultano gia' presenti prove hardware mirate:
+
+- `scripts/python/test_dht22.py`: test DHT22 lato Raspberry con libreria `adafruit_dht`.
+- `scripts/python/test_DS18B20.py`: test DS18B20 via interfaccia 1-Wire Linux (`/sys/bus/w1/devices/28-*`).
+- `scripts/python/test_soil_hum_d.py`: test uscita digitale del sensore umidita' suolo su `GPIO 25` in modalita' BCM.
+- `scripts/python/test_soil_hum_a.py`: lettura seriale da Arduino su `/dev/ttyACM0` a `9600` baud.
+- `scripts/ino/soil/soil.ino`: sketch Arduino che legge il sensore suolo analogico su `A0` e invia via seriale `soil=<percentuale>;raw=<valore>`.
+
+Nota importante: in `test_dht22.py` il commento dice `GPIO14 (pin fisico 8)`, ma il
+codice usa `board.D22`. La documentazione va quindi letta seguendo il codice
+effettivo finche' la discrepanza non viene corretta nel file.
 
 ## Avvio rapido sviluppo (PC)
 

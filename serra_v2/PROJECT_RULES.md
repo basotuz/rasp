@@ -107,7 +107,9 @@ serra_v2/
   docs/                     Documentazione tecnica
     raspberry-environment.md Ambiente operativo del Raspberry corrente
   logs/                     Log runtime locali
-  scripts/                  Script operativi
+  scripts/                  Script operativi e test hardware
+    python/                 Script Python di prova sensori sul Raspberry
+    ino/                    Sketch Arduino di prova
   src/serra_v2/             Codice Python applicativo
   tests/                    Test unitari e integrazione
   web/                      Home statica provvisoria per Apache
@@ -158,7 +160,27 @@ Script attuali:
 ./scripts/check.sh               # esegue test e lint
 ./scripts/sync_to_raspberry.sh   # (da PC) sync del codice verso Raspberry via rsync/ssh
 ./scripts/deploy_home.sh         # (su Raspberry) installa home statica e virtualhost Apache
+./scripts/python/*.py            # test hardware manuali lato Raspberry
+./scripts/ino/**/*.ino           # sketch di prova lato Arduino
 ```
+
+## Hardware emerso dai file attuali
+
+Dai file Python e Arduino presenti oggi nel repository emergono queste prove hardware:
+
+- DHT22 testato lato Raspberry con `adafruit_dht`.
+- DS18B20 testato lato Raspberry via 1-Wire Linux.
+- Sensore umidita' suolo con doppio approccio:
+  - uscita digitale letta direttamente dal Raspberry su `GPIO 25` (BCM);
+  - uscita analogica letta da Arduino su `A0`, poi inviata al Raspberry via seriale USB.
+- Formato seriale di test gia' osservato: `soil=<percentuale>;raw=<valore>`.
+
+Pin e collegamenti da considerare documentati solo se confermati dal codice:
+
+- `GPIO 25` per la lettura digitale del sensore suolo (`test_soil_hum_d.py`);
+- `A0` Arduino per la lettura analogica del sensore suolo (`scripts/ino/soil/soil.ino`);
+- DHT22 con discrepanza tra commento e codice nel test attuale:
+  commento `GPIO14`, codice `board.D22`.
 
 Flusso sviluppo locale consigliato (PC):
 
@@ -276,6 +298,8 @@ La modalita' manuale deve poter intervenire in modo chiaro e controllato.
 - Non introdurre MQTT, Telegram o Home Assistant prima di avere una base locale stabile.
 - Non rendere Arduino responsabile di decisioni applicative complesse.
 - Non hardcodare pin, soglie o porte seriali dentro la logica centrale.
+- Se uno script di test hardware contiene una discrepanza tra commento e codice,
+  considerare il codice come riferimento temporaneo e allineare subito la documentazione.
 - Non cambiare struttura cartelle senza aggiornare questo file.
 - Non lasciare script rotti o non eseguibili.
 

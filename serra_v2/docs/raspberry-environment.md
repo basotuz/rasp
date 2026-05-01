@@ -83,6 +83,26 @@ Risultati attesi:
 - tabelle SQLite iniziali: `sensor_readings`, `events`, `actuator_commands`;
 - stato applicativo stampato in JSON da `scripts/status.sh`.
 
+## Test hardware presenti nel repository
+
+Nel repository sono ora presenti anche script manuali di bring-up hardware:
+
+- `scripts/python/test_dht22.py`
+- `scripts/python/test_DS18B20.py`
+- `scripts/python/test_soil_hum_d.py`
+- `scripts/python/test_soil_hum_a.py`
+- `scripts/ino/soil/soil.ino`
+
+Informazioni osservate dai file:
+
+- sensore suolo digitale letto direttamente dal Raspberry su `GPIO 25` (BCM);
+- sensore suolo analogico letto da Arduino su `A0` e pubblicato via seriale USB;
+- porta seriale usata nei test: `/dev/ttyACM0`;
+- baud rate usato nei test: `9600`;
+- DS18B20 letto tramite filesystem 1-Wire Linux (`/sys/bus/w1/devices/28-*`);
+- DHT22 presente nei test lato Raspberry, con discrepanza da correggere tra
+  commento (`GPIO14`) e codice (`board.D22`).
+
 ## Decisione attuale
 
 Apache, PHP e MariaDB sono installati e disponibili sul Raspberry, ma la base

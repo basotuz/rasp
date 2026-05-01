@@ -69,6 +69,7 @@ Se `.venv` non esiste ancora:
 - Recuperare dalla Serra V1 gli script citati in `docs/v1-systemd-services.md`.
 - Schema MariaDB V1 di `dati` e `stati` acquisito in `docs/v1-database.md`.
 - Recuperare significato dei canali V1 `L1`, `L2`, `R1`, `R2`, `S1`, `F1`, `V1`.
+- Consolidare i test hardware attuali in moduli applicativi stabili dopo la fase di prova.
 
 ## Comandi utili
 
@@ -179,3 +180,15 @@ git diff --staged
 - Decisione aggiornata: Serra v2 usera' Flask per dashboard operativa ed endpoint HTTP locali.
 - Aggiornati `README.md`, `PROJECT_RULES.md`, `TODO.md`, `docs/architecture.md` e `docs/raspberry-environment.md`.
 - Chiarito che la scelta di Flask e' architetturale, ma l'app Flask non e' ancora implementata nel codice corrente.
+
+### 2026-05-01 - Script hardware aggiunti
+
+- Aggiunti script Python di test hardware in `scripts/python/`.
+- Aggiunto sketch Arduino di test suolo in `scripts/ino/soil/soil.ino`.
+- Dai file emergono queste prove attuali:
+  - DHT22 testato lato Raspberry con `adafruit_dht`;
+  - DS18B20 testato lato Raspberry via 1-Wire Linux;
+  - sensore suolo digitale letto su `GPIO 25`;
+  - sensore suolo analogico letto da Arduino su `A0` e inviato via seriale a `9600` baud su `/dev/ttyACM0`.
+- Aggiornata la documentazione su struttura cartelle, protocollo seriale di test e ambiente Raspberry.
+- Rilevata discrepanza da correggere in `scripts/python/test_dht22.py`: commento `GPIO14`, codice `board.D22`.
