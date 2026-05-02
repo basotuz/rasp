@@ -26,6 +26,9 @@ build/
 data/*.db
 data/*.sqlite
 data/*.sqlite3
+db/*.db
+db/*.sqlite
+db/*.sqlite3
 data/runtime/
 logs/*.log
 logs/*.jsonl

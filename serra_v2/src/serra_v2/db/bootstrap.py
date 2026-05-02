@@ -8,7 +8,8 @@ from serra_v2.db.connection import connect
 
 def bootstrap_database() -> Path:
     settings = load_settings()
-    schema_path = Path(__file__).with_name("schema.sql")
+    # Keep the versioned SQL file in repo root as the single source of truth.
+    schema_path = Path(__file__).resolve().parents[3] / "db" / "init_db_sqlite.sql"
 
     with connect(settings.database_path) as connection:
         connection.executescript(schema_path.read_text(encoding="utf-8"))

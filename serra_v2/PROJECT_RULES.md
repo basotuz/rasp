@@ -130,6 +130,8 @@ Nota pratica sul database:
   e non devono diventare source of truth del repository.
 - il nome target del database applicativo deve restare `serra`
   (per SQLite: `serra.db`), anche quando cambieranno versioni o moduli del progetto.
+- lo schema SQLite applicativo ufficiale e' `db/init_db_sqlite.sql`;
+- il bootstrap Python deve usare quello schema come riferimento unico.
 
 Roadmap operativa:
 
@@ -146,8 +148,6 @@ Roadmap operativa:
   decisione esplicita e relativa migrazione documentata.
 - Non lasciare convivere a lungo piu' database runtime concorrenti senza
   chiarire quale sia quello ufficiale dell'applicazione.
-- Non puntare il codice applicativo a un nuovo file database finche' schema
-  Python e schema SQL osservato non sono stati unificati.
 - Tenere Arduino semplice: esecuzione hardware, non logica applicativa complessa.
 - Separare sempre:
   - route/template/UI Flask;

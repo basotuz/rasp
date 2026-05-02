@@ -5,7 +5,7 @@ from serra_v2.services.greenhouse import GreenhouseService
 def test_current_status_uses_configured_mode(tmp_path):
     settings = Settings(
         environment="test",
-        database_path=tmp_path / "serra.sqlite3",
+        database_path=tmp_path / "serra.db",
         serial_port="/dev/null",
         serial_baudrate=9600,
         mode="MANUALE",

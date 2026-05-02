@@ -13,6 +13,9 @@ Arduino gestisce sensori/attuatori a basso livello e comunica con Raspberry via 
 - `db`: schema SQLite, connessione e bootstrap
 - `web`: entrypoint HTTP Flask, route handler, template e asset UI
 
+Lo schema SQLite applicativo versionato vive in `db/init_db_sqlite.sql`, mentre
+il runtime locale di default usa `db/serra.db`.
+
 Sul Raspberry corrente sono installati anche Apache, PHP e MariaDB come servizi
 di piattaforma disponibili. La scelta applicativa per Serra v2 e' Flask come
 livello web locale, mantenendo SQLite come database iniziale. Apache puo' restare

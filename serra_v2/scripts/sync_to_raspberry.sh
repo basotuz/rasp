@@ -67,6 +67,9 @@ RSYNC_ARGS=(
   --exclude ".mypy_cache/"
   --exclude "*.pyc"
   --exclude "*.pyo"
+  # I database runtime restano locali alla macchina che li genera.
+  --exclude "*.db"
+  --exclude "*.sqlite"
   --exclude "*.sqlite3"
   --exclude "data/"
   --exclude "logs/"

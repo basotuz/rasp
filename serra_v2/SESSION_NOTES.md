@@ -70,10 +70,7 @@ Se `.venv` non esiste ancora:
 - Schema MariaDB V1 di `dati` e `stati` acquisito in `docs/v1-database.md`.
 - Recuperare significato dei canali V1 `L1`, `L2`, `R1`, `R2`, `S1`, `F1`, `V1`.
 - Consolidare i test hardware attuali in moduli applicativi stabili dopo la fase di prova.
-- Decidere quale database SQLite restera' ufficiale tra `data/serra_v2.sqlite3` e `db/serra.db`.
-- Allineare gli script SQL `db/init_db_mariadb.sql` e `db/init_db_sqlite.sql`.
-- Mantenere come naming target definitivo `serra.db`, anche se il path runtime
-  finale verra' deciso solo dopo l'unificazione degli schemi.
+- Pulire il database Raspberry `db/serra.db` dalla tabella extra `test` se non serve.
 
 ## Comandi utili
 
@@ -139,7 +136,7 @@ git diff --staged
 - Aggiunto `scripts/status.sh` per verificare lo stato applicativo da CLI.
 - Rimossi `SERRA_HOST`, `SERRA_PORT` e la sezione `[server]` dalla configurazione.
 - Verificato `./scripts/check.sh`: test passati e Ruff senza errori.
-- Verificato `./scripts/bootstrap_db.sh`: database creato/aggiornato in `data/serra_v2.sqlite3`.
+- Verificato `./scripts/bootstrap_db.sh`: database creato/aggiornato nella fase iniziale in `data/serra_v2.sqlite3`.
 
 ### 2026-04-30 - Ambiente Raspberry
 
@@ -208,10 +205,9 @@ git diff --staged
   `src/serra_v2/api/` e `src/serra_v2/web/` come stato runtime locale non
   pienamente allineato al repository PC.
 - Verificato `db/serra.db` via `sqlite3`: tabelle `sensors`, `sensor_data`,
-  `devices`, `device_state`, `manual_commands`, `event_log`, `irrigation_log`
-  piu' una tabella extra `test`.
+  `devices`, `device_state`, `manual_commands`, `event_log`, `irrigation_log`.
 - Conteggi osservati in `db/serra.db`: `sensors=4`, `sensor_data=4`, `devices=3`,
-  `device_state=3`, `manual_commands=0`, `event_log=2`, `irrigation_log=0`, `test=0`.
+  `device_state=3`, `manual_commands=0`, `event_log=2`, `irrigation_log=0`.
 - Rilevata divergenza tra gli script SQL osservati:
   `trigger_type` nel draft MariaDB locale e `trigger` nello script SQLite del Raspberry.
 - Aggiornati i file `.md` per distinguere chiaramente struttura versionata del repo
@@ -220,9 +216,16 @@ git diff --staged
 ### 2026-05-02 - Decisione naming database
 
 - Decisione presa: il database applicativo deve chiamarsi `serra` / `serra.db`.
-- Il codice non viene ancora spostato direttamente su `db/serra.db` per evitare
-  di mescolare lo schema Python attuale (`sensor_readings`, `events`,
-  `actuator_commands`) con lo schema SQL piu' nuovo (`sensors`, `sensor_data`,
-  `devices`, `device_state`, `manual_commands`, `event_log`, `irrigation_log`).
-- Prossimo passo corretto: unificare gli schemi e solo dopo rendere `serra.db`
-  il database runtime ufficiale del progetto.
+
+### 2026-05-02 - Schema applicativo unificato
+
+- Unificato lo schema applicativo sul modello `sensors`, `sensor_data`, `devices`,
+  `device_state`, `manual_commands`, `event_log`, `irrigation_log`.
+- Aggiunto `db/init_db_sqlite.sql` come source of truth SQLite versionato.
+- Allineato `db/init_db_mariadb.sql` allo stesso modello concettuale.
+- Il bootstrap Python ora usa `db/init_db_sqlite.sql` e path di default `db/serra.db`.
+- Aggiornati `.env.example`, `config/default.toml`, `.gitignore`,
+  `scripts/sync_to_raspberry.sh` e i test unitari per il nuovo path/database.
+- Verificati sul Raspberry: `./scripts/check.sh`, `./scripts/bootstrap_db.sh`
+  e `./scripts/status.sh`.
+- Rimossa dal `db/serra.db` del Raspberry la tabella locale extra `test`.

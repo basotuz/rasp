@@ -66,13 +66,13 @@ Nota importante: il test DHT22 e' stato riallineato a `board.D22`, cioe' `BCM GP
 
 Nel repository locale e' ora presente anche:
 
-- `db/init_db_mariadb.sql`: bozza di schema MariaDB con dati seed.
+- `db/init_db_sqlite.sql`: schema SQLite applicativo ufficiale.
+- `db/init_db_mariadb.sql`: variante MariaDB dello stesso schema applicativo.
 
 Sul Raspberry corrente sono stati osservati anche questi artefatti runtime:
 
-- `db/init_db_sqlite.sql`: script SQLite con lo stesso impianto concettuale;
 - `db/serra.db`: database SQLite reale;
-- `data/serra_v2.sqlite3`: database creato dal bootstrap Python gia' presente nel progetto.
+- `data/serra_v2.sqlite3`: database legacy creato dal bootstrap Python della fase iniziale.
 
 Nel database `db/serra.db` sul Raspberry risultano attualmente queste tabelle:
 
@@ -83,15 +83,20 @@ Nel database `db/serra.db` sul Raspberry risultano attualmente queste tabelle:
 - `manual_commands` (0 righe)
 - `event_log` (2 righe)
 - `irrigation_log` (0 righe)
-- `test` (0 righe, tabella extra non prevista dallo script init osservato)
-
-Nota importante: gli script SQL MariaDB e SQLite non sono ancora perfettamente
-allineati al 100% nei dettagli di sintassi e in almeno un nome campo
-(`trigger_type` nel draft MariaDB, `trigger` nello script SQLite).
 
 Decisione presa: il nome target del database applicativo deve essere `serra`
 (quindi `serra.db` in ambiente SQLite), cosi' il nome resta stabile anche nelle
 evoluzioni future del progetto.
+
+Lo schema applicativo e' stato unificato sul modello:
+
+- `sensors`
+- `sensor_data`
+- `devices`
+- `device_state`
+- `manual_commands`
+- `event_log`
+- `irrigation_log`
 
 ## Avvio rapido sviluppo (PC)
 
@@ -117,15 +122,8 @@ source .venv/bin/activate
 
 `scripts/status.sh` stampa lo stato applicativo iniziale in JSON. La scelta
 dello stack UI/API e' stata fatta: useremo Flask, mantenendo separati dominio,
-database e integrazione hardware.
-
-Ad oggi il runtime Raspberry mostra due percorsi SQLite distinti
-(`data/serra_v2.sqlite3` e `db/serra.db`): questa situazione va consolidata
-prima di considerare definitivo il perimetro del database applicativo.
-
-Per evitare di mischiare schemi diversi nello stesso file, il codice non viene
-ancora spostato automaticamente su `db/serra.db` finche' non allineiamo lo
-schema Python attuale e lo schema SQL piu' nuovo osservato sul Raspberry.
+database e integrazione hardware. Il bootstrap applicativo ora punta a `db/serra.db`
+usando come source of truth `db/init_db_sqlite.sql`.
 
 ## Workflow Git
 
@@ -146,15 +144,15 @@ L'ambiente preparato sul Raspberry corrente (`rasp3`, accesso `ssh baso@serra-v2
 
 ## Sync PC -> Raspberry
 
-Per sincronizzare il codice dal PC al Raspberry (senza copiare `.venv/`, `data/`, `logs/`):
+Per sincronizzare il codice dal PC al Raspberry (senza copiare `.venv/`, database runtime, `data/`, `logs/`):
 
 ```bash
 ./scripts/sync_to_raspberry.sh
 ```
 
-Nota: la sync del progetto non copia `data/`, quindi eventuali database runtime
-come `data/serra_v2.sqlite3` restano locali al Raspberry. Il database osservato
-in `db/serra.db` sul Raspberry, invece, oggi non fa ancora parte del repository PC.
+Nota: la sync del progetto non copia i file database runtime (`*.db`, `*.sqlite`,
+`*.sqlite3`), quindi `db/serra.db` e gli eventuali database legacy restano locali
+alla macchina su cui vengono generati.
 
 Per allineare anche cancellando file sul Raspberry (attenzione):
 

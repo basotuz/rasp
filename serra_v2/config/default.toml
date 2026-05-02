@@ -4,7 +4,7 @@ environment = "development"
 mode = "AUTO"
 
 [database]
-path = "data/serra_v2.sqlite3"
+path = "db/serra.db"
 
 [serial]
 port = "/dev/ttyACM0"

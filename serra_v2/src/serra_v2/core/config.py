@@ -17,7 +17,7 @@ class Settings:
 def load_settings() -> Settings:
     return Settings(
         environment=os.getenv("SERRA_ENV", "development"),
-        database_path=Path(os.getenv("SERRA_DATABASE_PATH", "data/serra_v2.sqlite3")),
+        database_path=Path(os.getenv("SERRA_DATABASE_PATH", "db/serra.db")),
         serial_port=os.getenv("SERRA_SERIAL_PORT", "/dev/ttyACM0"),
         serial_baudrate=int(os.getenv("SERRA_SERIAL_BAUDRATE", "9600")),
         mode=os.getenv("SERRA_MODE", "AUTO"),
