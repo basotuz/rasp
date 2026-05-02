@@ -37,6 +37,7 @@ serra_v2/
   arduino/                 Firmware Arduino
   config/                  Configurazioni versionate di esempio
   data/                    Database locali e file runtime ignorati da Git
+  db/                      Script SQL e materiali schema database
   docs/                    Documentazione tecnica e workflow
   logs/                    Log runtime ignorati da Git
   deploy/                  File di deploy versionati
@@ -60,6 +61,33 @@ Nei file attuali del progetto risultano gia' presenti prove hardware mirate:
 
 Nota importante: il test DHT22 e' stato riallineato a `board.D22`, cioe' `BCM GPIO22`
 (`pin fisico 15`).
+
+## Database osservati
+
+Nel repository locale e' ora presente anche:
+
+- `db/init_db_mariadb.sql`: bozza di schema MariaDB con dati seed.
+
+Sul Raspberry corrente sono stati osservati anche questi artefatti runtime:
+
+- `db/init_db_sqlite.sql`: script SQLite con lo stesso impianto concettuale;
+- `db/serra.db`: database SQLite reale;
+- `data/serra_v2.sqlite3`: database creato dal bootstrap Python gia' presente nel progetto.
+
+Nel database `db/serra.db` sul Raspberry risultano attualmente queste tabelle:
+
+- `sensors` (4 righe)
+- `sensor_data` (4 righe)
+- `devices` (3 righe)
+- `device_state` (3 righe)
+- `manual_commands` (0 righe)
+- `event_log` (2 righe)
+- `irrigation_log` (0 righe)
+- `test` (0 righe, tabella extra non prevista dallo script init osservato)
+
+Nota importante: gli script SQL MariaDB e SQLite non sono ancora perfettamente
+allineati al 100% nei dettagli di sintassi e in almeno un nome campo
+(`trigger_type` nel draft MariaDB, `trigger` nello script SQLite).
 
 ## Avvio rapido sviluppo (PC)
 
@@ -87,6 +115,10 @@ source .venv/bin/activate
 dello stack UI/API e' stata fatta: useremo Flask, mantenendo separati dominio,
 database e integrazione hardware.
 
+Ad oggi il runtime Raspberry mostra due percorsi SQLite distinti
+(`data/serra_v2.sqlite3` e `db/serra.db`): questa situazione va consolidata
+prima di considerare definitivo il perimetro del database applicativo.
+
 ## Workflow Git
 
 La strategia consigliata e' descritta in [docs/git-workflow.md](docs/git-workflow.md).
@@ -111,6 +143,10 @@ Per sincronizzare il codice dal PC al Raspberry (senza copiare `.venv/`, `data/`
 ```bash
 ./scripts/sync_to_raspberry.sh
 ```
+
+Nota: la sync del progetto non copia `data/`, quindi eventuali database runtime
+come `data/serra_v2.sqlite3` restano locali al Raspberry. Il database osservato
+in `db/serra.db` sul Raspberry, invece, oggi non fa ancora parte del repository PC.
 
 Per allineare anche cancellando file sul Raspberry (attenzione):
 

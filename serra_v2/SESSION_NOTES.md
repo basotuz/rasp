@@ -70,6 +70,8 @@ Se `.venv` non esiste ancora:
 - Schema MariaDB V1 di `dati` e `stati` acquisito in `docs/v1-database.md`.
 - Recuperare significato dei canali V1 `L1`, `L2`, `R1`, `R2`, `S1`, `F1`, `V1`.
 - Consolidare i test hardware attuali in moduli applicativi stabili dopo la fase di prova.
+- Decidere quale database SQLite restera' ufficiale tra `data/serra_v2.sqlite3` e `db/serra.db`.
+- Allineare gli script SQL `db/init_db_mariadb.sql` e `db/init_db_sqlite.sql`.
 
 ## Comandi utili
 
@@ -195,3 +197,20 @@ git diff --staged
   - parsing seriale corretto per il formato `soil=<percentuale>;raw=<valore>`;
   - DHT22 allineato a `board.D22` (`BCM GPIO22`, `pin fisico 15`);
   - naming e struttura resi piu' coerenti tra script Python e sketch Arduino.
+
+### 2026-05-02 - Ricontrollo cartelle e database Raspberry
+
+- Nel repository locale e' comparsa la cartella `db/` con `db/init_db_mariadb.sql`.
+- Sul Raspberry sono stati osservati anche `db/init_db_sqlite.sql` e `db/serra.db`.
+- Sul Raspberry continuano a esistere anche `data/serra_v2.sqlite3`, `.env`,
+  `src/serra_v2/api/` e `src/serra_v2/web/` come stato runtime locale non
+  pienamente allineato al repository PC.
+- Verificato `db/serra.db` via `sqlite3`: tabelle `sensors`, `sensor_data`,
+  `devices`, `device_state`, `manual_commands`, `event_log`, `irrigation_log`
+  piu' una tabella extra `test`.
+- Conteggi osservati in `db/serra.db`: `sensors=4`, `sensor_data=4`, `devices=3`,
+  `device_state=3`, `manual_commands=0`, `event_log=2`, `irrigation_log=0`, `test=0`.
+- Rilevata divergenza tra gli script SQL osservati:
+  `trigger_type` nel draft MariaDB locale e `trigger` nello script SQLite del Raspberry.
+- Aggiornati i file `.md` per distinguere chiaramente struttura versionata del repo
+  e stato reale del runtime sul Raspberry.

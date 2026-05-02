@@ -83,6 +83,58 @@ Risultati attesi:
 - tabelle SQLite iniziali: `sensor_readings`, `events`, `actuator_commands`;
 - stato applicativo stampato in JSON da `scripts/status.sh`.
 
+## Cartelle osservate sul Raspberry
+
+Oltre alla struttura versionata del repository, sul Raspberry sono attualmente
+presenti anche alcune cartelle/file runtime o locali non ancora allineati al PC:
+
+- `.env`
+- `db/init_db_sqlite.sql`
+- `db/serra.db`
+- `src/serra_v2/api/` (cartella presente, al momento senza file osservati)
+- `src/serra_v2/web/templates/`
+- `src/serra_v2/web/static/css/`
+- `src/serra_v2/web/static/js/`
+
+Questi elementi descrivono lo stato reale della macchina, ma non tutti sono
+attualmente versionati nel repository locale.
+
+## Database osservati sul Raspberry
+
+Sul Raspberry sono stati osservati due percorsi SQLite distinti:
+
+- `data/serra_v2.sqlite3`: database creato dal bootstrap Python gia' presente nel progetto;
+- `db/serra.db`: database SQLite aggiunto manualmente insieme a `db/init_db_sqlite.sql`.
+
+Lo script `db/init_db_sqlite.sql` definisce queste tabelle:
+
+- `sensors`
+- `sensor_data`
+- `devices`
+- `device_state`
+- `manual_commands`
+- `event_log`
+- `irrigation_log`
+
+Nel file reale `db/serra.db` risultano invece presenti:
+
+- `sensors` con 4 righe
+- `sensor_data` con 4 righe
+- `devices` con 3 righe
+- `device_state` con 3 righe
+- `manual_commands` con 0 righe
+- `event_log` con 2 righe
+- `irrigation_log` con 0 righe
+- `test` con 0 righe
+
+Nota: la tabella `test` compare nel database reale ma non nello script
+`init_db_sqlite.sql`, quindi il file SQLite sul Raspberry non e' perfettamente
+allineato allo script di init osservato.
+
+Inoltre il repository locale contiene `db/init_db_mariadb.sql`, concettualmente
+simile ma non identico allo script SQLite: la differenza piu' evidente emersa
+ora e' `trigger_type` nel draft MariaDB contro `trigger` nello script SQLite.
+
 ## Test hardware presenti nel repository
 
 Nel repository sono ora presenti anche script manuali di bring-up hardware:
@@ -115,3 +167,6 @@ applicativa scelta per Serra v2 e':
 Apache puo' restare un supporto operativo per virtualhost, pagina di cortesia o
 reverse proxy davanti a Flask. PHP e MariaDB non sono dipendenze applicative
 necessarie nella direzione corrente del progetto.
+
+Resta pero' da consolidare quale percorso SQLite sia quello applicativo ufficiale
+tra `data/serra_v2.sqlite3` e `db/serra.db`.

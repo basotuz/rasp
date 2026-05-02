@@ -102,6 +102,7 @@ serra_v2/
   arduino/                  Firmware Arduino
   config/                   Configurazioni versionate
   data/                     Database e dati runtime locali
+  db/                       Script SQL versionati e materiale schema database
   deploy/                   File di deploy versionati
     apache/serra_v2.conf    Virtualhost Apache provvisorio
   docs/                     Documentazione tecnica
@@ -122,6 +123,12 @@ Separazione logica del codice Python:
 - `hardware`: adattatori verso Arduino, seriale e dispositivi;
 - `services`: logica applicativa e orchestrazione.
 
+Nota pratica sul database:
+
+- gli script SQL versionati possono vivere in `db/`;
+- i file database reali (`*.db`, `*.sqlite`, `*.sqlite3`) restano artefatti runtime
+  e non devono diventare source of truth del repository.
+
 Roadmap operativa:
 
 - `TODO.md`: prossimi step, priorita', decisioni aperte e cose da non anticipare.
@@ -135,6 +142,8 @@ Roadmap operativa:
 - Non far dipendere il dominio direttamente da interfaccia, SQLite o seriale.
 - Non spostare il database applicativo da SQLite a MariaDB/MySQL senza una
   decisione esplicita e relativa migrazione documentata.
+- Non lasciare convivere a lungo piu' database runtime concorrenti senza
+  chiarire quale sia quello ufficiale dell'applicazione.
 - Tenere Arduino semplice: esecuzione hardware, non logica applicativa complessa.
 - Separare sempre:
   - route/template/UI Flask;
