@@ -72,6 +72,8 @@ Se `.venv` non esiste ancora:
 - Consolidare i test hardware attuali in moduli applicativi stabili dopo la fase di prova.
 - Decidere quale database SQLite restera' ufficiale tra `data/serra_v2.sqlite3` e `db/serra.db`.
 - Allineare gli script SQL `db/init_db_mariadb.sql` e `db/init_db_sqlite.sql`.
+- Mantenere come naming target definitivo `serra.db`, anche se il path runtime
+  finale verra' deciso solo dopo l'unificazione degli schemi.
 
 ## Comandi utili
 
@@ -214,3 +216,13 @@ git diff --staged
   `trigger_type` nel draft MariaDB locale e `trigger` nello script SQLite del Raspberry.
 - Aggiornati i file `.md` per distinguere chiaramente struttura versionata del repo
   e stato reale del runtime sul Raspberry.
+
+### 2026-05-02 - Decisione naming database
+
+- Decisione presa: il database applicativo deve chiamarsi `serra` / `serra.db`.
+- Il codice non viene ancora spostato direttamente su `db/serra.db` per evitare
+  di mescolare lo schema Python attuale (`sensor_readings`, `events`,
+  `actuator_commands`) con lo schema SQL piu' nuovo (`sensors`, `sensor_data`,
+  `devices`, `device_state`, `manual_commands`, `event_log`, `irrigation_log`).
+- Prossimo passo corretto: unificare gli schemi e solo dopo rendere `serra.db`
+  il database runtime ufficiale del progetto.

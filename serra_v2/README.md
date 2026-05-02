@@ -89,6 +89,10 @@ Nota importante: gli script SQL MariaDB e SQLite non sono ancora perfettamente
 allineati al 100% nei dettagli di sintassi e in almeno un nome campo
 (`trigger_type` nel draft MariaDB, `trigger` nello script SQLite).
 
+Decisione presa: il nome target del database applicativo deve essere `serra`
+(quindi `serra.db` in ambiente SQLite), cosi' il nome resta stabile anche nelle
+evoluzioni future del progetto.
+
 ## Avvio rapido sviluppo (PC)
 
 ```bash
@@ -118,6 +122,10 @@ database e integrazione hardware.
 Ad oggi il runtime Raspberry mostra due percorsi SQLite distinti
 (`data/serra_v2.sqlite3` e `db/serra.db`): questa situazione va consolidata
 prima di considerare definitivo il perimetro del database applicativo.
+
+Per evitare di mischiare schemi diversi nello stesso file, il codice non viene
+ancora spostato automaticamente su `db/serra.db` finche' non allineiamo lo
+schema Python attuale e lo schema SQL piu' nuovo osservato sul Raspberry.
 
 ## Workflow Git
 

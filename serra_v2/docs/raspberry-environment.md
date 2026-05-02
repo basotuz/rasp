@@ -135,6 +135,11 @@ Inoltre il repository locale contiene `db/init_db_mariadb.sql`, concettualmente
 simile ma non identico allo script SQLite: la differenza piu' evidente emersa
 ora e' `trigger_type` nel draft MariaDB contro `trigger` nello script SQLite.
 
+Decisione di naming: il database applicativo dovra' chiamarsi `serra`
+(`serra.db` nel caso SQLite), per evitare rinomini futuri in una possibile V3.
+Il cambio di percorso/runtime non e' ancora stato reso operativo nel codice
+perche' oggi esistono ancora due schemi diversi da unificare.
+
 ## Test hardware presenti nel repository
 
 Nel repository sono ora presenti anche script manuali di bring-up hardware:
